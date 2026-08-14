@@ -1,43 +1,798 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>blog</title>
 
-        <style>
-            header {
-                background-color: #ff01ff;
-                color: #ff0000;
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Blog de Filmes</title>
+
+
+    <!-- =========================
+         CSS
+    ========================== -->
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background-color: #111;
+
+            color: white;
+        }
+
+
+        /* CABEÇALHO */
+
+        header {
+
+            background: linear-gradient(
+                135deg,
+                #ff0000,
+                #8b0000
+            );
+
+            text-align: center;
+
+            padding: 50px 20px;
+        }
+
+
+        header h1 {
+
+            font-size: 40px;
+
+            margin-bottom: 15px;
+        }
+
+
+        header p {
+
+            font-size: 18px;
+
+            color: #eee;
+        }
+
+
+        /* CONTEÚDO */
+
+        main {
+
+            max-width: 1100px;
+
+            margin: 40px auto;
+
+            padding: 20px;
+        }
+
+
+        /* INTRODUÇÃO */
+
+        .introducao {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .introducao h2 {
+
+            color: #ff3333;
+
+            font-size: 30px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .introducao p {
+
+            color: #ccc;
+
+            margin: 10px;
+        }
+
+
+        /* PESQUISA */
+
+        .pesquisa {
+
+            margin-bottom: 30px;
+        }
+
+
+        .pesquisa input {
+
+            width: 100%;
+
+            padding: 15px;
+
+            background-color: #222;
+
+            color: white;
+
+            border: 2px solid #444;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+        }
+
+
+        .pesquisa input:focus {
+
+            outline: none;
+
+            border-color: red;
+        }
+
+
+        /* LISTA DE FILMES */
+
+        .lista-filmes {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(250px, 1fr)
+                );
+
+            gap: 25px;
+        }
+
+
+        /* CARD DO FILME */
+
+        .card {
+
+            background-color: #222;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0, 0, 0, 0.5);
+
+            transition: 0.3s;
+        }
+
+
+        .card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(255, 0, 0, 0.4);
+        }
+
+
+        /* IMAGEM */
+
+        .card img {
+
+            width: 100%;
+
+            height: 350px;
+
+            object-fit: cover;
+        }
+
+
+        /* CONTEÚDO DO CARD */
+
+        .card-conteudo {
+
+            padding: 20px;
+        }
+
+
+        .card h2 {
+
+            color: #ff3333;
+
+            margin-bottom: 12px;
+        }
+
+
+        .card p {
+
+            color: #ccc;
+
+            line-height: 1.5;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* NOTA */
+
+        .nota {
+
+            color: #ffd700 !important;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        /* BOTÕES */
+
+        .botoes {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+
+        button {
+
+            background-color: #333;
+
+            color: white;
+
+            border: none;
+
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+
+        button:hover {
+
+            background-color: #ff0000;
+        }
+
+
+        /* QUANDO NÃO ENCONTRAR FILME */
+
+        .sem-filmes {
+
+            text-align: center;
+
+            color: #aaa;
+
+            font-size: 20px;
+
+            grid-column: 1 / -1;
+
+            padding: 40px;
+        }
+
+
+        /* RODAPÉ */
+
+        footer {
+
+            background-color: #1a1a1a;
+
+            text-align: center;
+
+            padding: 30px;
+
+            margin-top: 50px;
+
+            color: #888;
+        }
+
+
+        /* CELULAR */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+
+                font-size: 30px;
             }
-        </style>
 
-    </head>
-    <body>
-       <header>
-            <h1>Meu blog tech</h1>    
-            <p>Vou compartilhar conhecimentos sobre tecnologia e programação</p>
-        </header>
 
-             <h2>Meu primeiro post</h2>
-              <button>❤️<span>0</span></button>
-              <button>👍​<span>0</span></button>
-            <P>Boas-vindas ao meu novo blog! Aqui vou falar um pouco sobre Animes e Filmes</P>
-            <p>Por: Breno Miguel Zurchetti</p>
-        <main>
-            <article>
-                <img src="https://mjackson.com.br/galeria-de-fotos/" alt="Descrição da imagem para acessibilidade">
-                <div>
-                    <h2>Quais são os meus Amimes ou filmes favoritos?
-                        Eu gosto de Atack On Titã, Homem-Aranha e etc; 
-                        Eu gosto de Atack On Titã pq acho a história muito boa e gosto de Homem-Aranha pq gosto do estilo dele
-                    </h2>
-                    <p class="artigo-autor">Por: Nome do Autor</p>
-                    <p>Texto sobre meus gostos de Animes e Filmes aqui</p>
-                    <button>0<span>0</span></button>
-                    <button>💲<span>0</span></button>
-                </div>
-            </article>
-        </main>
-    </body>
+            .card img {
+
+                height: 300px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+
+    <header>
+
+        <h1>
+            🎬 Meu Blog de Filmes
+        </h1>
+
+        <p>
+            Aqui vou compartilhar meus filmes favoritos,
+            minhas opiniões e minhas avaliações.
+        </p>
+
+    </header>
+
+
+
+    <!-- =========================
+         CONTEÚDO PRINCIPAL
+    ========================== -->
+
+    <main>
+
+
+        <!-- INTRODUÇÃO -->
+
+        <section class="introducao">
+
+            <h2>
+                Meus Filmes Favoritos
+            </h2>
+
+            <p>
+                Eu gosto de vários filmes e aqui estão
+                alguns dos meus favoritos.
+            </p>
+
+            <p>
+                Por: Breno Miguel Zurchetti
+            </p>
+
+        </section>
+
+
+
+        <!-- PESQUISA -->
+
+        <section class="pesquisa">
+
+            <input
+                type="text"
+                id="campo-pesquisa"
+                placeholder="🔎 Pesquise um filme..."
+            >
+
+        </section>
+
+
+
+        <!-- FILMES -->
+
+        <section
+            id="lista-filmes"
+            class="lista-filmes">
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================== -->
+
+    <footer>
+
+        <p>
+            🎬 Meu Blog de Filmes
+        </p>
+
+        <p>
+            Feito por Breno ❤️
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        /*
+        =====================================
+        LISTA DE FILMES
+        =====================================
+        */
+
+        const filmes = [
+
+            {
+
+                titulo: "Homem-Aranha",
+
+                ano: 2002,
+
+                genero: "Ação",
+
+                nota: 9,
+
+                imagem:
+                "https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudN7X.jpg",
+
+                descricao:
+                "Peter Parker ganha poderes e precisa aprender a lidar com grandes responsabilidades."
+
+            },
+
+
+            {
+
+                titulo: "Interestelar",
+
+                ano: 2014,
+
+                genero: "Ficção Científica",
+
+                nota: 10,
+
+                imagem:
+                "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+
+                descricao:
+                "Astronautas viajam pelo espaço em busca de um novo lar para a humanidade."
+
+            },
+
+
+            {
+
+                titulo: "Vingadores: Ultimato",
+
+                ano: 2019,
+
+                genero: "Ação",
+
+                nota: 10,
+
+                imagem:
+                "https://image.tmdb.org/t/p/w500/q6725aR8Zs4IwGMXzZT8aC8lh6n.jpg",
+
+                descricao:
+                "Os Vingadores tentam reverter os acontecimentos causados por Thanos."
+
+            },
+
+
+            {
+
+                titulo: "O Senhor dos Anéis",
+
+                ano: 2001,
+
+                genero: "Aventura",
+
+                nota: 10,
+
+                imagem:
+                "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkbl1cson.jpg",
+
+                descricao:
+                "Frodo recebe a missão de destruir o poderoso Um Anel."
+
+            },
+
+
+            {
+
+                titulo: "Batman: O Cavaleiro das Trevas",
+
+                ano: 2008,
+
+                genero: "Ação",
+
+                nota: 10,
+
+                imagem:
+                "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+
+                descricao:
+                "Batman enfrenta o Coringa em uma batalha pelo futuro de Gotham."
+
+            }
+
+        ];
+
+
+
+        /*
+        =====================================
+        PEGAR O LOCAL DOS FILMES
+        =====================================
+        */
+
+        const listaFilmes =
+            document.querySelector("#lista-filmes");
+
+
+
+        /*
+        =====================================
+        FUNÇÃO PARA MOSTRAR OS FILMES
+        =====================================
+        */
+
+        function mostrarFilmes(lista) {
+
+
+            /*
+            Limpa os filmes antigos.
+            */
+
+            listaFilmes.innerHTML = "";
+
+
+
+            /*
+            Verifica se encontrou algum filme.
+            */
+
+            if (lista.length === 0) {
+
+                listaFilmes.innerHTML = `
+                
+                    <p class="sem-filmes">
+                        😢 Nenhum filme encontrado.
+                    </p>
+
+                `;
+
+                return;
+            }
+
+
+
+            /*
+            =================================
+            FOR EACH
+            =================================
+
+            O forEach pega cada filme
+            individualmente e cria um card.
+            */
+
+            lista.forEach(filme => {
+
+
+                listaFilmes.innerHTML += `
+
+                    <article class="card">
+
+
+                        <img
+                            src="${filme.imagem}"
+                            alt="Poster de ${filme.titulo}"
+                        >
+
+
+                        <div class="card-conteudo">
+
+
+                            <h2>
+                                ${filme.titulo}
+                            </h2>
+
+
+                            <p>
+                                🎭 Gênero:
+                                ${filme.genero}
+                            </p>
+
+
+                            <p>
+                                📅 Ano:
+                                ${filme.ano}
+                            </p>
+
+
+                            <p class="nota">
+                                ⭐ Nota:
+                                ${filme.nota}/10
+                            </p>
+
+
+                            <p>
+                                ${filme.descricao}
+                            </p>
+
+
+                            <div class="botoes">
+
+
+                                <button
+                                    onclick="curtir(this)"
+                                >
+
+                                    ❤️
+
+                                    <span>
+                                        0
+                                    </span>
+
+                                </button>
+
+
+
+                                <button
+                                    onclick="curtir(this)"
+                                >
+
+                                    👍
+
+                                    <span>
+                                        0
+                                    </span>
+
+                                </button>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </article>
+
+                `;
+
+            });
+
+        }
+
+
+
+        /*
+        =====================================
+        MOSTRAR FILMES
+        =====================================
+        */
+
+        mostrarFilmes(filmes);
+
+
+
+        /*
+        =====================================
+        SISTEMA DE CURTIDAS
+        =====================================
+        */
+
+        function curtir(botao) {
+
+
+            /*
+            Encontra o <span>
+            dentro do botão.
+            */
+
+            const contador =
+                botao.querySelector("span");
+
+
+            /*
+            Pega o número atual.
+            */
+
+            let numero =
+                Number(contador.textContent);
+
+
+            /*
+            Aumenta 1.
+            */
+
+            numero++;
+
+
+            /*
+            Mostra o novo número.
+            */
+
+            contador.textContent =
+                numero;
+
+        }
+
+
+
+        /*
+        =====================================
+        PESQUISA
+        =====================================
+        */
+
+        const campoPesquisa =
+            document.querySelector(
+                "#campo-pesquisa"
+            );
+
+
+
+        /*
+        Quando o usuário digitar,
+        essa função será executada.
+        */
+
+        campoPesquisa.addEventListener(
+            "input",
+            () => {
+
+
+                /*
+                Pega o texto digitado.
+                */
+
+                const texto =
+                    campoPesquisa.value
+                    .toLowerCase();
+
+
+
+                /*
+                Procura os filmes
+                que combinam com o texto.
+                */
+
+                const resultado =
+                    filmes.filter(filme => {
+
+
+                        return filme.titulo
+                            .toLowerCase()
+                            .includes(texto);
+
+                    });
+
+
+
+                /*
+                Mostra o resultado.
+                */
+
+                mostrarFilmes(resultado);
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
 </html>

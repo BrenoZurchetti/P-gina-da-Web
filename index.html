@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Blog de Filmes</title>
+
+    <title>Meus Animes Favoritos</title>
+
     <style>
         * {
             box-sizing: border-box;
@@ -19,7 +21,7 @@
         }
 
         header {
-            background: linear-gradient(135deg,#ff0000,#8b0000);
+            background: linear-gradient(135deg, #ff0000, #8b0000);
             text-align: center;
             padding: 50px 20px;
         }
@@ -75,9 +77,9 @@
             border-color: red;
         }
 
-        .lista-filmes {
+        .lista-animes {
             display: grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
         }
 
@@ -85,7 +87,7 @@
             background-color: #222;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow:0 5px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             transition: 0.3s;
         }
 
@@ -141,7 +143,7 @@
             background-color: #ff0000;
         }
 
-        .sem-filmes {
+        .sem-animes {
             text-align: center;
             color: #aaa;
             font-size: 20px;
@@ -161,8 +163,8 @@
             header h1 {
                 font-size: 30px;
             }
-            .card img {
 
+            .card img {
                 height: 300px;
             }
         }
@@ -170,15 +172,25 @@
 </head>
 
 <body>
+
     <header>
-        <h1>🎬 Meu Blog de Filmes</h1>
-        <p>Aqui vou compartilhar meus filmes favoritos, minhas opiniões e minhas avaliações.</p>
+        <h1>🍥 Meus Animes Favoritos</h1>
+
+        <p>
+            Um cantinho para compartilhar meus animes favoritos,
+            personagens e avaliações.
+        </p>
     </header>
 
     <main>
+
         <section class="introducao">
-            <h2>Meus Filmes Favoritos</h2>
-            <p>Eu gosto de vários filmes e aqui estão                 alguns dos meus favoritos.
+
+            <h2>Meus Animes Favoritos</h2>
+
+            <p>
+                Eu gosto de vários animes e aqui estão alguns dos
+                meus favoritos.
             </p>
 
             <p>
@@ -187,428 +199,271 @@
 
         </section>
 
-
-
-        <!-- PESQUISA -->
-
         <section class="pesquisa">
 
             <input
                 type="text"
-                id="campo-pesquisa"
-                placeholder="🔎 Pesquise um filme..."
+                id="campoPesquisa"
+                placeholder="🔎 Pesquisar anime..."
+                onkeyup="pesquisarAnime()"
             >
 
         </section>
 
+        <section class="lista-animes" id="listaAnimes">
+
+            <!-- ONE PIECE -->
+
+            <article class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80"
+                    alt="One Piece"
+                >
+
+                <div class="card-conteudo">
+
+                    <h2>🏴‍☠️ One Piece</h2>
+
+                    <p>
+                        Acompanhe Monkey D. Luffy e sua tripulação
+                        em uma grande aventura pelos mares em busca
+                        do lendário One Piece.
+                    </p>
+
+                    <p class="nota">
+                        ⭐ Minha nota: 10/10
+                    </p>
+
+                    <div class="botoes">
+                        <button onclick="mostrarInfo('One Piece')">
+                            Ver detalhes
+                        </button>
+                    </div>
+
+                </div>
+
+            </article>
 
 
-        <!-- FILMES -->
+            <!-- NARUTO -->
 
-        <section
-            id="lista-filmes"
-            class="lista-filmes">
+            <article class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?auto=format&fit=crop&w=600&q=80"
+                    alt="Naruto"
+                >
+
+                <div class="card-conteudo">
+
+                    <h2>🍥 Naruto</h2>
+
+                    <p>
+                        Naruto Uzumaki é um jovem ninja que sonha
+                        em se tornar Hokage e conquistar o respeito
+                        de sua vila.
+                    </p>
+
+                    <p class="nota">
+                        ⭐ Minha nota: 10/10
+                    </p>
+
+                    <div class="botoes">
+                        <button onclick="mostrarInfo('Naruto')">
+                            Ver detalhes
+                        </button>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- JUJUTSU KAISEN -->
+
+            <article class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1577083552431-6e5fd01988a5?auto=format&fit=crop&w=600&q=80"
+                    alt="Jujutsu Kaisen"
+                >
+
+                <div class="card-conteudo">
+
+                    <h2>👹 Jujutsu Kaisen</h2>
+
+                    <p>
+                        Yuji Itadori entra no mundo dos feiticeiros
+                        após entrar em contato com um objeto amaldiçoado.
+                    </p>
+
+                    <p class="nota">
+                        ⭐ Minha nota: 10/10
+                    </p>
+
+                    <div class="botoes">
+                        <button onclick="mostrarInfo('Jujutsu Kaisen')">
+                            Ver detalhes
+                        </button>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- ATTACK ON TITAN -->
+
+            <article class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80"
+                    alt="Attack on Titan"
+                >
+
+                <div class="card-conteudo">
+
+                    <h2>⚔️ Attack on Titan</h2>
+
+                    <p>
+                        A humanidade luta pela sobrevivência enquanto
+                        vive cercada por enormes muralhas que tentam
+                        protegê-la dos Titãs.
+                    </p>
+
+                    <p class="nota">
+                        ⭐ Minha nota: 10/10
+                    </p>
+
+                    <div class="botoes">
+                        <button onclick="mostrarInfo('Attack on Titan')">
+                            Ver detalhes
+                        </button>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- DEMON SLAYER -->
+
+            <article class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80"
+                    alt="Demon Slayer"
+                >
+
+                <div class="card-conteudo">
+
+                    <h2>🔥 Demon Slayer</h2>
+
+                    <p>
+                        Tanjiro Kamado embarca em uma jornada para
+                        encontrar uma cura para sua irmã e enfrentar
+                        perigosos demônios.
+                    </p>
+
+                    <p class="nota">
+                        ⭐ Minha nota: 10/10
+                    </p>
+
+                    <div class="botoes">
+                        <button onclick="mostrarInfo('Demon Slayer')">
+                            Ver detalhes
+                        </button>
+                    </div>
+
+                </div>
+
+            </article>
+
         </section>
-
 
     </main>
 
 
-
-    <!-- =========================
-         RODAPÉ
-    ========================== -->
-
     <footer>
 
         <p>
-            🎬 Meu Blog de Filmes
+            © 2026 - Meu Site de Animes
         </p>
 
         <p>
-            Feito por Breno ❤️
+            Feito por Breno Miguel Zurchetti ❤️
         </p>
 
     </footer>
 
 
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
-
     <script>
 
+        function pesquisarAnime() {
 
-        /*
-        =====================================
-        LISTA DE FILMES
-        =====================================
-        */
+            const pesquisa =
+                document
+                .getElementById("campoPesquisa")
+                .value
+                .toLowerCase();
 
-        const filmes = [
+            const cards =
+                document.querySelectorAll(".card");
 
-            {
+            let encontrados = 0;
 
-                titulo: "Homem-Aranha",
+            cards.forEach(function(card) {
 
-                ano: 2002,
+                const nome =
+                    card
+                    .querySelector("h2")
+                    .textContent
+                    .toLowerCase();
 
-                genero: "Ação",
+                if (nome.includes(pesquisa)) {
 
-                nota: 10,
+                    card.style.display = "block";
 
-                imagem:
-                "https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudN7X.jpg",
+                    encontrados++;
 
-                descricao:
-                "Peter Parker ganha poderes e precisa aprender a lidar com grandes responsabilidades."
+                } else {
 
-            },
+                    card.style.display = "none";
 
-
-            {
-
-                titulo: "Interestelar",
-
-                ano: 2014,
-
-                genero: "Ficção Científica",
-
-                nota: 10,
-
-                imagem:
-                "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
-
-                descricao:
-                "Astronautas viajam pelo espaço em busca de um novo lar para a humanidade."
-
-            },
-
-
-            {
-
-                titulo: "Vingadores: Ultimato",
-
-                ano: 2019,
-
-                genero: "Ação",
-
-                nota: 10,
-
-                imagem:
-                "https://image.tmdb.org/t/p/w500/q6725aR8Zs4IwGMXzZT8aC8lh6n.jpg",
-
-                descricao:
-                "Os Vingadores tentam reverter os acontecimentos causados por Thanos."
-
-            },
-
-
-            {
-
-                titulo: "O Senhor dos Anéis",
-
-                ano: 2001,
-
-                genero: "Aventura",
-
-                nota: 8,
-
-                imagem:
-                "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkbl1cson.jpg",
-
-                descricao:
-                "Frodo recebe a missão de destruir o poderoso Um Anel."
-
-            },
-
-
-            {
-
-                titulo: "Batman: O Cavaleiro das Trevas",
-
-                ano: 2008,
-
-                genero: "Ação",
-
-                nota: 10,
-
-                imagem:
-                "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-
-                descricao:
-                "Batman enfrenta o Coringa em uma batalha pelo futuro de Gotham."
-
-            }
-
-        ];
-
-
-
-        /*
-        =====================================
-        PEGAR O LOCAL DOS FILMES
-        =====================================
-        */
-
-        const listaFilmes =
-            document.querySelector("#lista-filmes");
-
-
-
-        /*
-        =====================================
-        FUNÇÃO PARA MOSTRAR OS FILMES
-        =====================================
-        */
-
-        function mostrarFilmes(lista) {
-
-
-            /*
-            Limpa os filmes antigos.
-            */
-
-            listaFilmes.innerHTML = "";
-
-
-
-            /*
-            Verifica se encontrou algum filme.
-            */
-
-            if (lista.length === 0) {
-
-                listaFilmes.innerHTML = `
-                
-                    <p class="sem-filmes">
-                        😢 Nenhum filme encontrado.
-                    </p>
-
-                `;
-
-                return;
-            }
-
-
-
-            /*
-            =================================
-            FOR EACH
-            =================================
-
-            O forEach pega cada filme
-            individualmente e cria um card.
-            */
-
-            lista.forEach(filme => {
-
-
-                listaFilmes.innerHTML += `
-
-                    <article class="card">
-
-
-                        <img
-                            src="${filme.imagem}"
-                            alt="Poster de ${filme.titulo}"
-                        >
-
-
-                        <div class="card-conteudo">
-
-
-                            <h2>
-                                ${filme.titulo}
-                            </h2>
-
-
-                            <p>
-                                🎭 Gênero:
-                                ${filme.genero}
-                            </p>
-
-
-                            <p>
-                                📅 Ano:
-                                ${filme.ano}
-                            </p>
-
-
-                            <p class="nota">
-                                ⭐ Nota:
-                                ${filme.nota}/10
-                            </p>
-
-
-                            <p>
-                                ${filme.descricao}
-                            </p>
-
-
-                            <div class="botoes">
-
-
-                                <button
-                                    onclick="curtir(this)"
-                                >
-
-                                    ❤️
-
-                                    <span>
-                                        0
-                                    </span>
-
-                                </button>
-
-
-
-                                <button
-                                    onclick="curtir(this)"
-                                >
-
-                                    👍
-
-                                    <span>
-                                        0
-                                    </span>
-
-                                </button>
-
-
-                            </div>
-
-
-                        </div>
-
-
-                    </article>
-
-                `;
+                }
 
             });
 
         }
 
 
+        function mostrarInfo(anime) {
 
-        /*
-        =====================================
-        MOSTRAR FILMES
-        =====================================
-        */
+            const mensagens = {
 
-        mostrarFilmes(filmes);
+                "One Piece":
+                    "Uma aventura épica pelos mares com Luffy e sua tripulação!",
 
+                "Naruto":
+                    "A história de Naruto Uzumaki e sua jornada para se tornar Hokage.",
 
+                "Jujutsu Kaisen":
+                    "Feiticeiros enfrentam maldições e perigos sobrenaturais.",
 
-        /*
-        =====================================
-        SISTEMA DE CURTIDAS
-        =====================================
-        */
+                "Attack on Titan":
+                    "Uma história de sobrevivência, mistérios e batalhas contra os Titãs.",
 
-        function curtir(botao) {
+                "Demon Slayer":
+                    "Tanjiro enfrenta demônios enquanto busca uma maneira de salvar sua irmã."
 
+            };
 
-            /*
-            Encontra o <span>
-            dentro do botão.
-            */
-
-            const contador =
-                botao.querySelector("span");
-
-
-            /*
-            Pega o número atual.
-            */
-
-            let numero =
-                Number(contador.textContent);
-
-
-            /*
-            Aumenta 1.
-            */
-
-            numero++;
-
-
-            /*
-            Mostra o novo número.
-            */
-
-            contador.textContent =
-                numero;
+            alert(mensagens[anime]);
 
         }
 
-
-
-        /*
-        =====================================
-        PESQUISA
-        =====================================
-        */
-
-        const campoPesquisa =
-            document.querySelector(
-                "#campo-pesquisa"
-            );
-
-
-
-        /*
-        Quando o usuário digitar,
-        essa função será executada.
-        */
-
-        campoPesquisa.addEventListener(
-            "input",
-            () => {
-
-
-                /*
-                Pega o texto digitado.
-                */
-
-                const texto =
-                    campoPesquisa.value
-                    .toLowerCase();
-
-
-
-                /*
-                Procura os filmes
-                que combinam com o texto.
-                */
-
-                const resultado =
-                    filmes.filter(filme => {
-
-
-                        return filme.titulo
-                            .toLowerCase()
-                            .includes(texto);
-
-                    });
-
-
-
-                /*
-                Mostra o resultado.
-                */
-
-                mostrarFilmes(resultado);
-
-            }
-        );
-
-
     </script>
-
 
 </body>
 

@@ -1,15 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AnimeVerse | Meus Animes Favoritos</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AnimeVerse - plataforma de animes"
+    >
+
+    <title>AnimeVerse | Mundo dos Animes</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
 
     <style>
 
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        /* =========================================================
+           RESET
+        ========================================================= */
 
         * {
             margin: 0;
@@ -17,515 +45,1952 @@
             box-sizing: border-box;
         }
 
+        :root {
+
+            --bg: #07070c;
+            --bg2: #0d0d15;
+            --card: #11111b;
+            --card2: #171722;
+
+            --text: #ffffff;
+            --muted: #a6a6b5;
+
+            --purple: #8b5cf6;
+            --purple2: #6d28d9;
+
+            --blue: #2563eb;
+            --red: #ef4444;
+            --yellow: #facc15;
+            --green: #22c55e;
+
+            --border: rgba(255,255,255,.09);
+
+            --shadow:
+                0 20px 60px rgba(0,0,0,.45);
+
+            --radius: 18px;
+
+            --nav-height: 76px;
+        }
+
+        body.light {
+
+            --bg: #f4f4f8;
+            --bg2: #ffffff;
+            --card: #ffffff;
+            --card2: #eeeeF4;
+
+            --text: #15151b;
+            --muted: #666674;
+
+            --border: rgba(0,0,0,.08);
+
+            --shadow:
+                0 20px 50px rgba(0,0,0,.12);
+        }
+
         html {
             scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #07070b;
-            color: white;
+
+            min-height: 100vh;
+
+            font-family: "Inter", Arial, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(139,92,246,.13),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 70%,
+                    rgba(37,99,235,.10),
+                    transparent 30%
+                ),
+                var(--bg);
+
+            color: var(--text);
+
+            transition:
+                background .3s,
+                color .3s;
+
             overflow-x: hidden;
         }
 
-        /* =========================
-           FUNDO
-        ========================= */
-
         body::before {
+
             content: "";
+
             position: fixed;
-            width: 500px;
-            height: 500px;
-            background: #7c3cff;
+
+            width: 350px;
+            height: 350px;
+
+            top: 100px;
+            left: -180px;
+
+            background: var(--purple);
+
             filter: blur(180px);
-            opacity: 0.15;
-            top: -200px;
-            left: -200px;
+
+            opacity: .08;
+
+            pointer-events: none;
+
             z-index: -1;
         }
 
-        body::after {
-            content: "";
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            background: #ff1744;
-            filter: blur(180px);
-            opacity: 0.10;
-            right: -200px;
-            bottom: -200px;
-            z-index: -1;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        /* =========================
-           MENU
-        ========================= */
+        button,
+        input,
+        select {
 
-        nav {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* =========================================================
+           SCROLLBAR
+        ========================================================= */
+
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+
+            background:
+                linear-gradient(
+                    var(--purple),
+                    var(--blue)
+                );
+
+            border-radius: 20px;
+        }
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+
             position: fixed;
+
             top: 0;
-            width: 100%;
-            height: 75px;
-            padding: 0 7%;
+            left: 0;
+            right: 0;
+
+            height: var(--nav-height);
+
+            padding:
+                0 clamp(18px, 5vw, 80px);
+
             display: flex;
-            justify-content: space-between;
+
             align-items: center;
+            justify-content: space-between;
 
-            background: rgba(7, 7, 11, 0.75);
-            backdrop-filter: blur(15px);
+            background:
+                rgba(7,7,12,.78);
 
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
+
+            border-bottom:
+                1px solid var(--border);
 
             z-index: 1000;
         }
 
+        body.light .navbar {
+            background:
+                rgba(255,255,255,.78);
+        }
+
         .logo {
-            font-size: 25px;
-            font-weight: 800;
-            letter-spacing: 1px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            font-size: 23px;
+
+            font-weight: 900;
+
+            letter-spacing: -1px;
+        }
+
+        .logo-icon {
+
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--purple),
+                    var(--blue)
+                );
+
+            box-shadow:
+                0 0 25px rgba(139,92,246,.35);
         }
 
         .logo span {
-            color: #a970ff;
+            color: #a78bfa;
         }
 
-        nav a {
-            color: #aaa;
-            text-decoration: none;
-            margin-left: 30px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: white;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            min-height: 100vh;
-            padding: 150px 8% 80px;
+        .nav-links {
 
             display: flex;
+
             align-items: center;
 
+            gap: 28px;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .nav-links a {
+
+            transition:
+                color .25s,
+                transform .25s;
+        }
+
+        .nav-links a:hover {
+
+            color: var(--text);
+
+            transform: translateY(-2px);
+        }
+
+        .nav-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .icon-button {
+
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border);
+
+            background: var(--card);
+
+            color: var(--text);
+
+            transition: .25s;
+        }
+
+        .icon-button:hover {
+
+            border-color:
+                rgba(139,92,246,.5);
+
+            color: #a78bfa;
+
+            transform: translateY(-2px);
+        }
+
+        .menu-button {
+            display: none;
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+
+            min-height: 780px;
+
+            padding:
+                160px
+                clamp(22px, 7vw, 110px)
+                80px;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            overflow: hidden;
+
             background:
-                linear-gradient(90deg,
-                #07070b 10%,
-                rgba(7,7,11,0.85) 40%,
-                rgba(7,7,11,0.25) 100%),
-                url("https://ogre.natalie.mu/media/news/music/2016/0605/onepiece_key.jpg?imdensity=1&imwidth=750");
+
+                linear-gradient(
+                    90deg,
+                    var(--bg) 0%,
+                    rgba(7,7,12,.91) 35%,
+                    rgba(7,7,12,.45) 68%,
+                    rgba(7,7,12,.82) 100%
+                ),
+
+                url("https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1800&q=90");
+
+            background-size: cover;
+
+            background-position: center;
+        }
+
+        body.light .hero {
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #f4f4f8 0%,
+                    rgba(244,244,248,.91) 35%,
+                    rgba(244,244,248,.45) 68%,
+                    rgba(244,244,248,.82) 100%
+                ),
+
+                url("https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1800&q=90");
 
             background-size: cover;
             background-position: center;
         }
 
-        .hero-content {
-            max-width: 700px;
+        .hero::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 70%,
+                    var(--bg)
+                );
+
+            pointer-events: none;
         }
 
-        .tag {
-            display: inline-block;
-            padding: 8px 15px;
+        .hero-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 720px;
+        }
+
+        .hero-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                8px 14px;
+
             border-radius: 30px;
 
-            background: rgba(169,112,255,0.15);
-            border: 1px solid rgba(169,112,255,0.4);
+            color: #c4b5fd;
 
-            color: #c7a6ff;
-            margin-bottom: 20px;
+            background:
+                rgba(139,92,246,.13);
+
+            border:
+                1px solid rgba(139,92,246,.3);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 22px;
         }
 
         .hero h1 {
-            font-size: clamp(45px, 7vw, 85px);
-            line-height: 1;
-            margin-bottom: 25px;
+
+            font-size:
+                clamp(45px, 7vw, 86px);
+
+            line-height: .98;
+
+            letter-spacing: -5px;
+
+            font-weight: 900;
+
+            margin-bottom: 24px;
         }
 
         .hero h1 span {
-            color: #a970ff;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #c4b5fd,
+                    #818cf8,
+                    #38bdf8
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
         }
 
-        .hero p {
-            color: #c0c0c8;
-            font-size: 18px;
+        .hero-description {
+
+            max-width: 630px;
+
+            color: var(--muted);
+
+            font-size: 17px;
+
             line-height: 1.8;
-            max-width: 600px;
+
+            margin-bottom: 32px;
         }
 
         .hero-buttons {
-            margin-top: 35px;
+
             display: flex;
-            gap: 15px;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
         }
 
-        .btn {
-            padding: 14px 25px;
-            border-radius: 12px;
+        .primary-button,
+        .secondary-button {
+
+            min-height: 50px;
+
+            padding:
+                0 22px;
+
+            border-radius: 13px;
+
             border: none;
-            cursor: pointer;
 
-            font-size: 15px;
-            font-weight: 600;
+            display: inline-flex;
 
-            transition: 0.3s;
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            font-weight: 700;
+
+            transition: .25s;
         }
 
-        .btn-primary {
-            background: #a970ff;
+        .primary-button {
+
             color: white;
-            box-shadow: 0 0 25px rgba(169,112,255,0.3);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--purple),
+                    var(--blue)
+                );
+
+            box-shadow:
+                0 12px 30px
+                rgba(109,40,217,.28);
         }
 
-        .btn-primary:hover {
+        .primary-button:hover {
+
             transform: translateY(-3px);
-            box-shadow: 0 0 40px rgba(169,112,255,0.5);
+
+            box-shadow:
+                0 18px 40px
+                rgba(109,40,217,.4);
         }
 
-        .btn-secondary {
-            background: rgba(255,255,255,0.08);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.15);
+        .secondary-button {
+
+            color: var(--text);
+
+            background:
+                rgba(255,255,255,.07);
+
+            border:
+                1px solid var(--border);
+
+            backdrop-filter: blur(10px);
         }
 
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.15);
+        .secondary-button:hover {
+
+            background:
+                rgba(255,255,255,.12);
+
+            transform: translateY(-3px);
         }
 
-        /* =========================
-           CONTEÚDO
-        ========================= */
+        .hero-stats {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 28px;
+
+            margin-top: 45px;
+        }
+
+        .stat strong {
+
+            display: block;
+
+            font-size: 24px;
+        }
+
+        .stat span {
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
 
         main {
-            max-width: 1250px;
+
+            width: min(1400px, 92%);
+
             margin: auto;
-            padding: 80px 25px;
+        }
+
+        .section {
+
+            padding:
+                90px 0;
+        }
+
+        .section-header {
+
+            display: flex;
+
+            align-items: end;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 28px;
+        }
+
+        .section-kicker {
+
+            color: #a78bfa;
+
+            font-size: 12px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
         }
 
         .section-title {
-            margin-bottom: 35px;
+
+            font-size:
+                clamp(28px, 4vw, 42px);
+
+            letter-spacing: -1.5px;
         }
 
-        .section-title small {
-            color: #a970ff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
+        .section-description {
 
-        .section-title h2 {
-            font-size: 40px;
+            max-width: 550px;
+
+            color: var(--muted);
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
             margin-top: 8px;
         }
 
-        /* =========================
-           PESQUISA
-        ========================= */
+        /* =========================================================
+           SEARCH / FILTERS
+        ========================================================= */
 
-        .search-box {
-            margin-bottom: 40px;
-        }
+        .toolbar {
 
-        .search-box input {
-            width: 100%;
-            padding: 18px 22px;
-
-            background: #111117;
-            color: white;
-
-            border: 1px solid #272733;
-            border-radius: 15px;
-
-            font-size: 16px;
-
-            transition: 0.3s;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #a970ff;
-            box-shadow: 0 0 20px rgba(169,112,255,0.15);
-        }
-
-        /* =========================
-           GRID
-        ========================= */
-
-        .anime-grid {
             display: grid;
 
             grid-template-columns:
-                repeat(auto-fit, minmax(230px, 1fr));
+                1fr
+                180px
+                auto;
 
-            gap: 25px;
+            gap: 12px;
+
+            margin-bottom: 30px;
         }
 
-        /* =========================
-           CARD
-        ========================= */
+        .search {
+
+            position: relative;
+        }
+
+        .search span {
+
+            position: absolute;
+
+            left: 17px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: var(--muted);
+        }
+
+        .search input,
+        .filter-select {
+
+            width: 100%;
+
+            height: 52px;
+
+            border-radius: 13px;
+
+            border:
+                1px solid var(--border);
+
+            background: var(--card);
+
+            color: var(--text);
+
+            padding: 0 17px;
+
+            outline: none;
+
+            transition: .25s;
+        }
+
+        .search input {
+
+            padding-left: 45px;
+        }
+
+        .search input:focus,
+        .filter-select:focus {
+
+            border-color:
+                rgba(139,92,246,.65);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(139,92,246,.08);
+        }
+
+        .filter-button {
+
+            height: 52px;
+
+            border: 1px solid var(--border);
+
+            background: var(--card);
+
+            color: var(--text);
+
+            border-radius: 13px;
+
+            padding: 0 18px;
+
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           ANIME GRID
+        ========================================================= */
+
+        .anime-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(240px, 1fr)
+                );
+
+            gap: 22px;
+        }
 
         .anime-card {
+
             position: relative;
 
-            height: 480px;
+            min-height: 420px;
 
-            border-radius: 20px;
+            border-radius: var(--radius);
+
             overflow: hidden;
 
-            background: #111117;
+            background: var(--card);
 
-            border: 1px solid rgba(255,255,255,0.08);
+            border:
+                1px solid var(--border);
+
+            box-shadow: var(--shadow);
 
             cursor: pointer;
 
             transition:
-                transform 0.4s,
-                box-shadow 0.4s;
+                transform .35s,
+                border-color .35s,
+                box-shadow .35s;
+
+            animation:
+                cardIn .5s ease both;
+        }
+
+        @keyframes cardIn {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
         }
 
         .anime-card:hover {
-            transform: translateY(-12px) scale(1.02);
+
+            transform:
+                translateY(-10px);
+
+            border-color:
+                rgba(139,92,246,.35);
 
             box-shadow:
-                0 20px 50px rgba(0,0,0,0.6),
-                0 0 30px rgba(169,112,255,0.15);
+                0 25px 70px
+                rgba(0,0,0,.5),
+                0 0 30px
+                rgba(139,92,246,.08);
         }
 
-        .anime-card img {
+        .anime-image {
+
+            position: absolute;
+
+            inset: 0;
+
             width: 100%;
             height: 100%;
 
             object-fit: cover;
 
-            transition: 0.6s;
+            transition:
+                transform .7s;
         }
 
-        .anime-card:hover img {
-            transform: scale(1.08);
+        .anime-card:hover .anime-image {
+
+            transform:
+                scale(1.08);
         }
 
-        .card-overlay {
+        .anime-gradient {
+
             position: absolute;
+
             inset: 0;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-
-            padding: 25px;
 
             background:
                 linear-gradient(
                     transparent 25%,
-                    rgba(0,0,0,0.95) 90%
+                    rgba(5,5,9,.15) 40%,
+                    rgba(5,5,9,.96) 92%
                 );
         }
 
-        .rank {
+        .anime-number {
+
             position: absolute;
-            top: 18px;
-            left: 18px;
 
-            width: 45px;
-            height: 45px;
+            top: 15px;
+            left: 15px;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            min-width: 43px;
+            height: 36px;
 
-            border-radius: 12px;
+            padding: 0 10px;
 
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 10px;
+
+            background:
+                rgba(0,0,0,.65);
+
+            backdrop-filter: blur(12px);
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            font-size: 12px;
 
             font-weight: 800;
-            font-size: 18px;
-
-            border: 1px solid rgba(255,255,255,0.15);
         }
 
-        .anime-card h3 {
-            font-size: 25px;
+        .favorite {
+
+            position: absolute;
+
+            top: 15px;
+            right: 15px;
+
+            width: 39px;
+            height: 39px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            background:
+                rgba(0,0,0,.6);
+
+            color: white;
+
+            display: grid;
+
+            place-items: center;
+
+            font-size: 17px;
+
+            z-index: 3;
+
+            transition: .25s;
+        }
+
+        .favorite:hover {
+
+            background: var(--red);
+
+            transform: scale(1.1);
+        }
+
+        .favorite.active {
+
+            color: #ff5570;
+
+            background:
+                rgba(239,68,68,.18);
+
+            border-color:
+                rgba(239,68,68,.4);
+        }
+
+        .anime-info {
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding: 23px;
+        }
+
+        .anime-info h3 {
+
+            font-size: 23px;
+
             margin-bottom: 7px;
+
+            letter-spacing: -.5px;
         }
 
-        .anime-card p {
-            color: #bbb;
-            font-size: 13px;
-            line-height: 1.5;
+        .anime-meta {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-bottom: 10px;
         }
 
-        .rating {
-            margin-top: 12px;
-            color: #ffd54a;
+        .tag {
+
+            padding:
+                5px 8px;
+
+            border-radius: 7px;
+
+            background:
+                rgba(255,255,255,.09);
+
+            color: #ddd;
+
+            font-size: 10px;
+
             font-weight: 700;
         }
 
-        /* =========================
-           SOBRE
-        ========================= */
+        .anime-info p {
 
-        .about {
-            margin-top: 100px;
+            color: #bbb;
 
-            padding: 45px;
+            font-size: 12px;
 
-            border-radius: 25px;
+            line-height: 1.6;
+
+            display:
+                -webkit-box;
+
+            -webkit-line-clamp: 2;
+
+            -webkit-box-orient:
+                vertical;
+
+            overflow: hidden;
+        }
+
+        .rating {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 13px;
+
+            color: var(--yellow);
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+        .rating span {
+
+            color: #bbb;
+
+            font-weight: 500;
+        }
+
+        /* =========================================================
+           FEATURED
+        ========================================================= */
+
+        .featured {
+
+            display: grid;
+
+            grid-template-columns:
+                1.2fr .8fr;
+
+            gap: 20px;
+        }
+
+        .featured-main {
+
+            min-height: 480px;
+
+            position: relative;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            background:
+                url("https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1400&q=90")
+                center / cover;
+        }
+
+        .featured-main::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 20%,
+                    rgba(0,0,0,.9)
+                );
+        }
+
+        .featured-content {
+
+            position: absolute;
+
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+
+            z-index: 2;
+        }
+
+        .featured-content h3 {
+
+            font-size: 35px;
+
+            margin-bottom: 10px;
+        }
+
+        .featured-content p {
+
+            color: #bbb;
+
+            max-width: 650px;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+        .featured-side {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+        }
+
+        .mini-card {
+
+            min-height: 230px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 18px;
+
+            border: 1px solid var(--border);
+
+            background: var(--card);
+        }
+
+        .mini-card img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: .5s;
+        }
+
+        .mini-card:hover img {
+
+            transform: scale(1.07);
+        }
+
+        .mini-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 35%,
+                    rgba(0,0,0,.9)
+                );
+        }
+
+        .mini-info {
+
+            position: absolute;
+
+            z-index: 2;
+
+            left: 17px;
+            right: 17px;
+            bottom: 17px;
+        }
+
+        .mini-info h4 {
+
+            font-size: 17px;
+
+            margin-bottom: 4px;
+        }
+
+        .mini-info span {
+
+            color: #aaa;
+
+            font-size: 11px;
+        }
+
+        /* =========================================================
+           RANKING
+        ========================================================= */
+
+        .ranking {
+
+            display: grid;
+
+            gap: 10px;
+        }
+
+        .ranking-item {
+
+            display: grid;
+
+            grid-template-columns:
+                55px 70px 1fr auto auto;
+
+            align-items: center;
+
+            gap: 15px;
+
+            min-height: 82px;
+
+            padding: 10px 15px;
+
+            border:
+                1px solid var(--border);
+
+            background: var(--card);
+
+            border-radius: 15px;
+
+            transition: .25s;
+        }
+
+        .ranking-item:hover {
+
+            transform:
+                translateX(5px);
+
+            border-color:
+                rgba(139,92,246,.3);
+        }
+
+        .rank {
+
+            font-size: 22px;
+
+            font-weight: 900;
+
+            text-align: center;
+
+            color: #aaa;
+        }
+
+        .rank.gold {
+            color: #facc15;
+        }
+
+        .rank.silver {
+            color: #cbd5e1;
+        }
+
+        .rank.bronze {
+            color: #fb923c;
+        }
+
+        .rank-image {
+
+            width: 58px;
+            height: 58px;
+
+            border-radius: 11px;
+
+            object-fit: cover;
+        }
+
+        .rank-name {
+
+            font-weight: 800;
+        }
+
+        .rank-type {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-top: 5px;
+        }
+
+        .rank-rating {
+
+            color: var(--yellow);
+
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           CHARACTERS
+        ========================================================= */
+
+        .character-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(180px, 1fr)
+                );
+
+            gap: 16px;
+        }
+
+        .character {
+
+            overflow: hidden;
+
+            border-radius: 16px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            transition: .3s;
+        }
+
+        .character:hover {
+
+            transform:
+                translateY(-7px);
+
+            border-color:
+                rgba(139,92,246,.4);
+        }
+
+        .character img {
+
+            width: 100%;
+            height: 230px;
+
+            object-fit: cover;
+        }
+
+        .character-info {
+
+            padding: 15px;
+        }
+
+        .character-info h4 {
+
+            margin-bottom: 5px;
+        }
+
+        .character-info p {
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+        /* =========================================================
+           STATS
+        ========================================================= */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .stat-box {
+
+            padding: 25px;
+
+            border-radius: 17px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            text-align: center;
+        }
+
+        .stat-box .number {
+
+            font-size: 34px;
+
+            font-weight: 900;
 
             background:
                 linear-gradient(
                     135deg,
-                    rgba(169,112,255,0.12),
-                    rgba(255,255,255,0.03)
+                    #c4b5fd,
+                    #38bdf8
                 );
 
-            border: 1px solid rgba(255,255,255,0.08);
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
         }
 
-        .about h2 {
+        .stat-box p {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-top: 5px;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+
+            margin-top: 80px;
+
+            padding:
+                55px 5%;
+
+            border-top:
+                1px solid var(--border);
+
+            background:
+                rgba(0,0,0,.15);
+        }
+
+        .footer-grid {
+
+            max-width: 1400px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr 1fr;
+
+            gap: 40px;
+        }
+
+        .footer-description {
+
+            max-width: 400px;
+
+            color: var(--muted);
+
+            line-height: 1.8;
+
+            font-size: 13px;
+
+            margin-top: 15px;
+        }
+
+        .footer-column h4 {
+
             margin-bottom: 15px;
         }
 
-        .about p {
-            color: #aaa;
-            line-height: 1.8;
+        .footer-column a {
+
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            margin: 10px 0;
+
+            transition: .2s;
         }
 
-        /* =========================
+        .footer-column a:hover {
+
+            color: var(--text);
+
+            transform:
+                translateX(3px);
+        }
+
+        .copyright {
+
+            max-width: 1400px;
+
+            margin: 45px auto 0;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid var(--border);
+
+            color: #777;
+
+            font-size: 12px;
+        }
+
+        /* =========================================================
            MODAL
-        ========================= */
+        ========================================================= */
 
         .modal {
+
             position: fixed;
+
             inset: 0;
 
             display: none;
-            justify-content: center;
-            align-items: center;
 
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-
-            z-index: 2000;
+            place-items: center;
 
             padding: 20px;
+
+            background:
+                rgba(0,0,0,.82);
+
+            backdrop-filter:
+                blur(12px);
+
+            z-index: 3000;
         }
 
-        .modal.active {
-            display: flex;
+        .modal.open {
+            display: grid;
         }
 
-        .modal-content {
-            position: relative;
+        .modal-box {
 
-            max-width: 600px;
-            width: 100%;
+            width:
+                min(900px, 100%);
 
-            padding: 35px;
+            max-height: 90vh;
 
-            border-radius: 25px;
+            overflow-y: auto;
 
-            background: #111117;
+            border-radius: 23px;
 
-            border: 1px solid rgba(255,255,255,0.1);
+            background: var(--card);
 
-            box-shadow: 0 30px 80px black;
+            border:
+                1px solid var(--border);
 
-            animation: aparecer 0.3s ease;
+            box-shadow:
+                0 30px 100px
+                rgba(0,0,0,.7);
+
+            animation:
+                modalIn .3s ease;
         }
 
-        @keyframes aparecer {
+        @keyframes modalIn {
+
             from {
+
                 opacity: 0;
-                transform: scale(0.9);
+
+                transform:
+                    translateY(25px)
+                    scale(.96);
             }
 
             to {
+
                 opacity: 1;
-                transform: scale(1);
+
+                transform:
+                    translateY(0)
+                    scale(1);
             }
         }
 
-        .close {
+        .modal-banner {
+
+            height: 310px;
+
+            position: relative;
+
+            background-size: cover;
+
+            background-position: center;
+
+            display: flex;
+
+            align-items: end;
+
+            padding: 30px;
+        }
+
+        .modal-banner::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 25%,
+                    rgba(0,0,0,.9)
+                );
+        }
+
+        .modal-banner-content {
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .modal-banner h2 {
+
+            font-size: 40px;
+
+            margin-bottom: 7px;
+        }
+
+        .modal-body {
+
+            padding: 30px;
+        }
+
+        .modal-close {
+
             position: absolute;
 
             right: 20px;
-            top: 15px;
+            top: 20px;
 
-            background: none;
-            border: none;
+            z-index: 5;
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,.15);
+
+            background:
+                rgba(0,0,0,.6);
 
             color: white;
 
-            font-size: 30px;
-
-            cursor: pointer;
+            font-size: 20px;
         }
 
-        .modal-content h2 {
-            color: #b889ff;
-            font-size: 35px;
-            margin-bottom: 15px;
-        }
+        .modal-description {
 
-        .modal-content p {
-            color: #bbb;
+            color: var(--muted);
+
             line-height: 1.8;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
         }
 
-        /* =========================
-           FOOTER
-        ========================= */
+        .detail-grid {
 
-        footer {
-            padding: 40px 20px;
+            display: grid;
 
-            text-align: center;
+            grid-template-columns:
+                repeat(3, 1fr);
 
-            border-top: 1px solid rgba(255,255,255,0.08);
+            gap: 10px;
 
-            color: #777;
+            margin-bottom: 25px;
         }
 
-        footer strong {
-            color: #a970ff;
+        .detail {
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            background:
+                var(--card2);
         }
 
-        /* =========================
-           MOBILE
-        ========================= */
+        .detail small {
 
-        @media (max-width: 700px) {
+            display: block;
 
-            nav {
-                padding: 0 20px;
+            color: var(--muted);
+
+            font-size: 10px;
+
+            margin-bottom: 5px;
+        }
+
+        .detail strong {
+
+            font-size: 13px;
+        }
+
+        .modal-section-title {
+
+            margin:
+                25px 0 15px;
+
+            font-size: 20px;
+        }
+
+        .trailer {
+
+            position: relative;
+
+            height: 260px;
+
+            overflow: hidden;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #18182a,
+                    #09090e
+                );
+
+            display: grid;
+
+            place-items: center;
+        }
+
+        .play-button {
+
+            width: 65px;
+            height: 65px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--purple),
+                    var(--blue)
+                );
+
+            color: white;
+
+            font-size: 23px;
+
+            box-shadow:
+                0 0 35px
+                rgba(139,92,246,.45);
+        }
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        .toast-container {
+
+            position: fixed;
+
+            right: 20px;
+            bottom: 20px;
+
+            z-index: 5000;
+
+            display: grid;
+
+            gap: 10px;
+        }
+
+        .toast {
+
+            min-width: 280px;
+
+            padding: 15px 17px;
+
+            border-radius: 13px;
+
+            background:
+                #171722;
+
+            border:
+                1px solid var(--border);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.4);
+
+            color: white;
+
+            animation:
+                toastIn .3s ease;
+        }
+
+        @keyframes toastIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateX(20px);
             }
 
-            nav .links {
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateX(0);
+            }
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .nav-links {
                 display: none;
             }
 
+            .menu-button {
+                display: grid;
+            }
+
+            .featured {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .footer-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .stats-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            :root {
+                --nav-height: 68px;
+            }
+
             .hero {
-                padding: 130px 25px 70px;
-                background-position: 65% center;
+
+                min-height: 720px;
+
+                padding:
+                    130px 22px 70px;
             }
 
             .hero h1 {
+
                 font-size: 48px;
+
+                letter-spacing:
+                    -3px;
             }
 
-            .hero p {
-                font-size: 15px;
+            .hero-description {
+
+                font-size: 14px;
+            }
+
+            .toolbar {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .section {
+
+                padding:
+                    65px 0;
+            }
+
+            .section-header {
+
+                display: block;
+            }
+
+            .anime-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 12px;
             }
 
             .anime-card {
-                height: 430px;
+
+                min-height: 330px;
             }
 
-            .about {
-                padding: 30px;
+            .anime-info {
+
+                padding: 15px;
+            }
+
+            .anime-info h3 {
+
+                font-size: 17px;
+            }
+
+            .anime-info p {
+
+                font-size: 10px;
+            }
+
+            .featured-side {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .ranking-item {
+
+                grid-template-columns:
+                    35px 55px 1fr auto;
+            }
+
+            .rank-type {
+
+                display: none;
+            }
+
+            .rank-rating {
+
+                font-size: 11px;
+            }
+
+            .detail-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .modal-banner {
+
+                height: 230px;
+            }
+
+            .modal-banner h2 {
+
+                font-size: 28px;
+            }
+
+            .footer-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .anime-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .anime-card {
+
+                min-height: 430px;
+            }
+
+            .stats-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .featured-side {
+
+                grid-template-columns:
+                    1fr;
             }
         }
 
@@ -533,60 +1998,166 @@
 
 </head>
 
+
 <body>
 
-    <!-- MENU -->
+    <!-- =========================================================
+         NAVBAR
+    ========================================================= -->
 
-    <nav>
+    <header class="navbar">
 
-        <div class="logo">
+        <a
+            href="#inicio"
+            class="logo"
+        >
+
+            <div class="logo-icon">
+                ⛩
+            </div>
+
             Anime<span>Verse</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="#inicio">
+                Início
+            </a>
+
+            <a href="#animes">
+                Animes
+            </a>
+
+            <a href="#personagens">
+                Personagens
+            </a>
+
+            <a href="#ranking">
+                Ranking
+            </a>
+
+            <a href="#sobre">
+                Sobre
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <button
+                class="icon-button"
+                onclick="toggleTheme()"
+                title="Alterar tema"
+            >
+                🌓
+            </button>
+
+            <button
+                class="icon-button menu-button"
+                onclick="showToast('Menu mobile ativado!')"
+            >
+                ☰
+            </button>
+
         </div>
 
-        <div class="links">
-            <a href="#inicio">Início</a>
-            <a href="#animes">Animes</a>
-            <a href="#sobre">Sobre</a>
-        </div>
-
-    </nav>
+    </header>
 
 
-    <!-- HERO -->
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
 
-    <section class="hero" id="inicio">
+    <section
+        class="hero"
+        id="inicio"
+    >
 
         <div class="hero-content">
 
-            <span class="tag">
-                ✦ Meu catálogo pessoal
-            </span>
+            <div class="hero-badge">
+                ✦ Bem-vindo ao AnimeVerse
+            </div>
 
             <h1>
-                Meus<br>
-                <span>Animes Favoritos</span>
+                Explore o
+                <span>mundo dos animes.</span>
             </h1>
 
-            <p>
-                Uma coleção dos animes que mais gosto.
-                Aqui você pode conhecer minhas escolhas,
-                avaliações e algumas das histórias que mais
-                me marcaram.
+            <p class="hero-description">
+
+                Descubra histórias épicas, personagens inesquecíveis
+                e universos incríveis. Explore Attack on Titan,
+                Dragon Ball, Blue Lock, Naruto, Os 7 Pecados Capitais
+                e Jujutsu Kaisen em um único lugar.
+
             </p>
+
 
             <div class="hero-buttons">
 
-                <a href="#animes">
-                    <button class="btn btn-primary">
-                        Explorar animes
-                    </button>
+                <a
+                    href="#animes"
+                    class="primary-button"
+                >
+                    ▶ Explorar animes
                 </a>
 
-                <a href="#sobre">
-                    <button class="btn btn-secondary">
-                        Sobre o site
-                    </button>
+                <a
+                    href="#ranking"
+                    class="secondary-button"
+                >
+                    🏆 Ver ranking
                 </a>
+
+            </div>
+
+
+            <div class="hero-stats">
+
+                <div class="stat">
+
+                    <strong>06</strong>
+
+                    <span>
+                        Animes
+                    </span>
+
+                </div>
+
+                <div class="stat">
+
+                    <strong>30+</strong>
+
+                    <span>
+                        Personagens
+                    </span>
+
+                </div>
+
+                <div class="stat">
+
+                    <strong>100+</strong>
+
+                    <span>
+                        Episódios
+                    </span>
+
+                </div>
+
+                <div class="stat">
+
+                    <strong>∞</strong>
+
+                    <span>
+                        Aventuras
+                    </span>
+
+                </div>
 
             </div>
 
@@ -595,412 +2166,2156 @@
     </section>
 
 
-    <!-- CONTEÚDO -->
-
-    <main id="animes">
-
-        <div class="section-title">
-
-            <small>Minha coleção</small>
-
-            <h2>
-                Top 5 Animes
-            </h2>
-
-        </div>
+    <main>
 
 
-        <!-- PESQUISA -->
+        <!-- =====================================================
+             ANIMES
+        ===================================================== -->
 
-        <div class="search-box">
+        <section
+            class="section"
+            id="animes"
+        >
 
-            <input
-                type="text"
-                id="pesquisa"
-                placeholder="🔎 Pesquisar por anime..."
-                onkeyup="pesquisar()"
-            >
+            <div class="section-header">
 
-        </div>
+                <div>
 
+                    <div class="section-kicker">
+                        Minha coleção
+                    </div>
 
-        <!-- CARDS -->
+                    <h2 class="section-title">
+                        Animes em destaque
+                    </h2>
 
-        <div class="anime-grid" id="animeGrid">
-
-
-            <!-- ONE PIECE -->
-
-            <article
-                class="anime-card"
-                data-name="one piece"
-                onclick="abrirModal('One Piece')"
-            >
-
-                <img
-                    src="https://ogre.natalie.mu/media/news/music/2016/0605/onepiece_key.jpg?imdensity=1&imwidth=750"
-                    alt="One Piece"
-                >
-
-                <div class="rank">
-                    #1
-                </div>
-
-                <div class="card-overlay">
-
-                    <h3>
-                        One Piece
-                    </h3>
-
-                    <p>
-                        A aventura de Luffy e sua tripulação
-                        em busca do lendário One Piece.
+                    <p class="section-description">
+                        Escolha um anime para descobrir mais detalhes,
+                        personagens, temporadas e curiosidades.
                     </p>
 
-                    <div class="rating">
-                        ★★★★★ 10/10
+                </div>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <div class="search">
+
+                    <span>
+                        🔎
+                    </span>
+
+                    <input
+                        id="searchInput"
+                        type="search"
+                        placeholder="Pesquisar anime..."
+                        oninput="filterAnimes()"
+                    >
+
+                </div>
+
+
+                <select
+                    id="genreFilter"
+                    class="filter-select"
+                    onchange="filterAnimes()"
+                >
+
+                    <option value="all">
+                        Todos os gêneros
+                    </option>
+
+                    <option value="acao">
+                        Ação
+                    </option>
+
+                    <option value="aventura">
+                        Aventura
+                    </option>
+
+                    <option value="esporte">
+                        Esporte
+                    </option>
+
+                    <option value="fantasia">
+                        Fantasia
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="filter-button"
+                    onclick="resetFilters()"
+                >
+                    Limpar filtros
+                </button>
+
+            </div>
+
+
+            <div
+                class="anime-grid"
+                id="animeGrid"
+            >
+
+
+                <!-- ATTACK ON TITAN -->
+
+                <article
+                    class="anime-card"
+                    data-name="attack on titan ataque aos titãs aot"
+                    data-genre="acao"
+                    onclick="openAnime('aot')"
+                >
+
+                    <img
+                        class="anime-image"
+                        src="https://images.unsplash.com/photo-1541560052-77ec1bbc09f7?auto=format&fit=crop&w=800&q=85"
+                        alt="Attack on Titan"
+                    >
+
+                    <div class="anime-gradient"></div>
+
+                    <div class="anime-number">
+                        #01
+                    </div>
+
+                    <button
+                        class="favorite"
+                        onclick="toggleFavorite(event,'aot')"
+                        id="fav-aot"
+                        aria-label="Favoritar Attack on Titan"
+                    >
+                        ♡
+                    </button>
+
+                    <div class="anime-info">
+
+                        <div class="anime-meta">
+
+                            <span class="tag">
+                                Ação
+                            </span>
+
+                            <span class="tag">
+                                Drama
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Attack on Titan
+                        </h3>
+
+                        <p>
+                            A humanidade luta pela sobrevivência
+                            contra os misteriosos Titãs.
+                        </p>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span>
+                                9.8
+                            </span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- DRAGON BALL -->
+
+                <article
+                    class="anime-card"
+                    data-name="dragon ball dragonball goku vegeta"
+                    data-genre="acao"
+                    onclick="openAnime('db')"
+                >
+
+                    <img
+                        class="anime-image"
+                        src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=800&q=85"
+                        alt="Dragon Ball"
+                    >
+
+                    <div class="anime-gradient"></div>
+
+                    <div class="anime-number">
+                        #02
+                    </div>
+
+                    <button
+                        class="favorite"
+                        onclick="toggleFavorite(event,'db')"
+                        id="fav-db"
+                        aria-label="Favoritar Dragon Ball"
+                    >
+                        ♡
+                    </button>
+
+                    <div class="anime-info">
+
+                        <div class="anime-meta">
+
+                            <span class="tag">
+                                Ação
+                            </span>
+
+                            <span class="tag">
+                                Luta
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Dragon Ball
+                        </h3>
+
+                        <p>
+                            Goku e seus amigos enfrentam inimigos
+                            cada vez mais poderosos.
+                        </p>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span>
+                                9.7
+                            </span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- BLUE LOCK -->
+
+                <article
+                    class="anime-card"
+                    data-name="blue lock futebol futebol"
+                    data-genre="esporte"
+                    onclick="openAnime('bluelock')"
+                >
+
+                    <img
+                        class="anime-image"
+                        src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=800&q=85"
+                        alt="Blue Lock"
+                    >
+
+                    <div class="anime-gradient"></div>
+
+                    <div class="anime-number">
+                        #03
+                    </div>
+
+                    <button
+                        class="favorite"
+                        onclick="toggleFavorite(event,'bluelock')"
+                        id="fav-bluelock"
+                        aria-label="Favoritar Blue Lock"
+                    >
+                        ♡
+                    </button>
+
+                    <div class="anime-info">
+
+                        <div class="anime-meta">
+
+                            <span class="tag">
+                                Esporte
+                            </span>
+
+                            <span class="tag">
+                                Futebol
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Blue Lock
+                        </h3>
+
+                        <p>
+                            Jovens atacantes competem para se tornar
+                            o maior centroavante do Japão.
+                        </p>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span>
+                                9.5
+                            </span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- NARUTO -->
+
+                <article
+                    class="anime-card"
+                    data-name="naruto uzumaki ninja"
+                    data-genre="aventura"
+                    onclick="openAnime('naruto')"
+                >
+
+                    <img
+                        class="anime-image"
+                        src="https://images.unsplash.com/photo-1601850494422-3cf14624b0b3?auto=format&fit=crop&w=800&q=85"
+                        alt="Naruto"
+                    >
+
+                    <div class="anime-gradient"></div>
+
+                    <div class="anime-number">
+                        #04
+                    </div>
+
+                    <button
+                        class="favorite"
+                        onclick="toggleFavorite(event,'naruto')"
+                        id="fav-naruto"
+                        aria-label="Favoritar Naruto"
+                    >
+                        ♡
+                    </button>
+
+                    <div class="anime-info">
+
+                        <div class="anime-meta">
+
+                            <span class="tag">
+                                Aventura
+                            </span>
+
+                            <span class="tag">
+                                Ninja
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Naruto
+                        </h3>
+
+                        <p>
+                            Naruto Uzumaki sonha em se tornar Hokage
+                            e conquistar o respeito da sua vila.
+                        </p>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span>
+                                9.6
+                            </span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 7 PECADOS -->
+
+                <article
+                    class="anime-card"
+                    data-name="7 pecados capitais sete pecados capitais nanatsu no taizai meliodas"
+                    data-genre="fantasia"
+                    onclick="openAnime('pecados')"
+                >
+
+                    <img
+                        class="anime-image"
+                        src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=800&q=85"
+                        alt="Os 7 Pecados Capitais"
+                    >
+
+                    <div class="anime-gradient"></div>
+
+                    <div class="anime-number">
+                        #05
+                    </div>
+
+                    <button
+                        class="favorite"
+                        onclick="toggleFavorite(event,'pecados')"
+                        id="fav-pecados"
+                        aria-label="Favoritar Os 7 Pecados Capitais"
+                    >
+                        ♡
+                    </button>
+
+                    <div class="anime-info">
+
+                        <div class="anime-meta">
+
+                            <span class="tag">
+                                Fantasia
+                            </span>
+
+                            <span class="tag">
+                                Aventura
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            7 Pecados Capitais
+                        </h3>
+
+                        <p>
+                            Meliodas e os Sete Pecados Capitais
+                            embarcam em uma grande aventura.
+                        </p>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span>
+                                9.0
+                            </span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- JUJUTSU -->
+
+                <article
+                    class="anime-card"
+                    data-name="jujutsu kaisen gojo itadori sukuna"
+                    data-genre="acao"
+                    onclick="openAnime('jjk')"
+                >
+
+                    <img
+                        class="anime-image"
+                        src="https://images.unsplash.com/photo-1577083552431-6e5fd01988a5?auto=format&fit=crop&w=800&q=85"
+                        alt="Jujutsu Kaisen"
+                    >
+
+                    <div class="anime-gradient"></div>
+
+                    <div class="anime-number">
+                        #06
+                    </div>
+
+                    <button
+                        class="favorite"
+                        onclick="toggleFavorite(event,'jjk')"
+                        id="fav-jjk"
+                        aria-label="Favoritar Jujutsu Kaisen"
+                    >
+                        ♡
+                    </button>
+
+                    <div class="anime-info">
+
+                        <div class="anime-meta">
+
+                            <span class="tag">
+                                Ação
+                            </span>
+
+                            <span class="tag">
+                                Sobrenatural
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Jujutsu Kaisen
+                        </h3>
+
+                        <p>
+                            Yuji Itadori entra no mundo dos feiticeiros
+                            e das maldições.
+                        </p>
+
+                        <div class="rating">
+                            ★★★★★
+                            <span>
+                                9.6
+                            </span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DESTAQUES
+        ===================================================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <div class="section-kicker">
+                        Em destaque
+                    </div>
+
+                    <h2 class="section-title">
+                        Histórias que marcaram
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="featured">
+
+                <div class="featured-main">
+
+                    <div class="featured-content">
+
+                        <div class="hero-badge">
+                            ⚔️ Destaque
+                        </div>
+
+                        <h3>
+                            Attack on Titan
+                        </h3>
+
+                        <p>
+                            Uma história repleta de mistérios,
+                            batalhas, reviravoltas e personagens
+                            marcantes.
+                        </p>
+
+                        <br>
+
+                        <button
+                            class="primary-button"
+                            onclick="openAnime('aot')"
+                        >
+                            Ver detalhes
+                        </button>
+
                     </div>
 
                 </div>
 
-            </article>
+
+                <div class="featured-side">
+
+                    <div class="mini-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=600&q=80"
+                            alt="Dragon Ball"
+                        >
+
+                        <div class="mini-info">
+
+                            <h4>
+                                Dragon Ball
+                            </h4>
+
+                            <span>
+                                Ação • Luta
+                            </span>
+
+                        </div>
+
+                    </div>
 
 
-            <!-- NARUTO -->
+                    <div class="mini-card">
 
-            <article
-                class="anime-card"
-                data-name="naruto"
-                onclick="abrirModal('Naruto')"
-            >
+                        <img
+                            src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=600&q=80"
+                            alt="Blue Lock"
+                        >
 
-                <img
-                    src="https://naruto-official.com/_next/image?url=%2Fimages%2Fspecial%2Fanime-gallery%2Fvisual2.jpg&w=1200&q=75"
-                    alt="Naruto"
-                >
+                        <div class="mini-info">
 
-                <div class="rank">
-                    #2
-                </div>
+                            <h4>
+                                Blue Lock
+                            </h4>
 
-                <div class="card-overlay">
+                            <span>
+                                Esporte • Futebol
+                            </span>
 
-                    <h3>
-                        Naruto
-                    </h3>
+                        </div>
 
-                    <p>
-                        A jornada de Naruto para se tornar
-                        Hokage e conquistar o respeito da vila.
-                    </p>
+                    </div>
 
-                    <div class="rating">
-                        ★★★★★ 10/10
+
+                    <div class="mini-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1601850494422-3cf14624b0b3?auto=format&fit=crop&w=600&q=80"
+                            alt="Naruto"
+                        >
+
+                        <div class="mini-info">
+
+                            <h4>
+                                Naruto
+                            </h4>
+
+                            <span>
+                                Ninja • Aventura
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mini-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1577083552431-6e5fd01988a5?auto=format&fit=crop&w=600&q=80"
+                            alt="Jujutsu Kaisen"
+                        >
+
+                        <div class="mini-info">
+
+                            <h4>
+                                Jujutsu Kaisen
+                            </h4>
+
+                            <span>
+                                Ação • Maldições
+                            </span>
+
+                        </div>
+
                     </div>
 
                 </div>
 
-            </article>
+            </div>
+
+        </section>
 
 
-            <!-- JUJUTSU -->
+        <!-- =====================================================
+             RANKING
+        ===================================================== -->
 
-            <article
-                class="anime-card"
-                data-name="jujutsu kaisen"
-                onclick="abrirModal('Jujutsu Kaisen')"
-            >
+        <section
+            class="section"
+            id="ranking"
+        >
 
-                <img
-                    src="https://static.wikia.nocookie.net/jujutsu-kaisen/images/8/88/Anime_Key_Visual_2.png/revision/latest/scale-to-width-down/1200?cb=20201212034001"
-                    alt="Jujutsu Kaisen"
-                >
+            <div class="section-header">
 
-                <div class="rank">
-                    #3
+                <div>
+
+                    <div class="section-kicker">
+                        Top da comunidade
+                    </div>
+
+                    <h2 class="section-title">
+                        Ranking dos animes
+                    </h2>
+
                 </div>
 
-                <div class="card-overlay">
+            </div>
 
-                    <h3>
-                        Jujutsu Kaisen
-                    </h3>
 
-                    <p>
-                        Feiticeiros enfrentam maldições
-                        em batalhas sobrenaturais.
-                    </p>
+            <div class="ranking">
 
-                    <div class="rating">
-                        ★★★★★ 10/10
+
+                <div class="ranking-item">
+
+                    <div class="rank gold">
+                        1
+                    </div>
+
+                    <img
+                        class="rank-image"
+                        src="https://images.unsplash.com/photo-1541560052-77ec1bbc09f7?auto=format&fit=crop&w=200&q=80"
+                        alt=""
+                    >
+
+                    <div>
+
+                        <div class="rank-name">
+                            Attack on Titan
+                        </div>
+
+                        <div class="rank-type">
+                            Ação • Drama
+                        </div>
+
+                    </div>
+
+                    <div>
+                        ⭐
+                    </div>
+
+                    <div class="rank-rating">
+                        9.8
                     </div>
 
                 </div>
 
-            </article>
 
+                <div class="ranking-item">
 
-            <!-- ATTACK ON TITAN -->
+                    <div class="rank silver">
+                        2
+                    </div>
 
-            <article
-                class="anime-card"
-                data-name="attack on titan"
-                onclick="abrirModal('Attack on Titan')"
-            >
+                    <img
+                        class="rank-image"
+                        src="https://images.unsplash.com/photo-1577083552431-6e5fd01988a5?auto=format&fit=crop&w=200&q=80"
+                        alt=""
+                    >
 
-                <img
-                    src="https://contents.oricon.co.jp/upimg/news/2302000/2301790/20231104_030916_p_o_70262485.jpg"
-                    alt="Attack on Titan"
-                >
+                    <div>
 
-                <div class="rank">
-                    #4
-                </div>
+                        <div class="rank-name">
+                            Jujutsu Kaisen
+                        </div>
 
-                <div class="card-overlay">
+                        <div class="rank-type">
+                            Ação • Sobrenatural
+                        </div>
 
-                    <h3>
-                        Attack on Titan
-                    </h3>
+                    </div>
 
-                    <p>
-                        Uma luta desesperada pela sobrevivência
-                        contra os misteriosos Titãs.
-                    </p>
+                    <div>
+                        ⭐
+                    </div>
 
-                    <div class="rating">
-                        ★★★★★ 10/10
+                    <div class="rank-rating">
+                        9.6
                     </div>
 
                 </div>
 
-            </article>
 
+                <div class="ranking-item">
 
-            <!-- DEMON SLAYER -->
+                    <div class="rank bronze">
+                        3
+                    </div>
 
-            <article
-                class="anime-card"
-                data-name="demon slayer"
-                onclick="abrirModal('Demon Slayer')"
-            >
+                    <img
+                        class="rank-image"
+                        src="https://images.unsplash.com/photo-1601850494422-3cf14624b0b3?auto=format&fit=crop&w=200&q=80"
+                        alt=""
+                    >
 
-                <img
-                    src="https://s.animeanime.jp/imgs/p/64XVvff3mD9cFhi_PU1_DqGg_6ytrq_oqaqr/499345.jpg?zoom=spacing"
-                    alt="Demon Slayer"
-                >
+                    <div>
 
-                <div class="rank">
-                    #5
-                </div>
+                        <div class="rank-name">
+                            Naruto
+                        </div>
 
-                <div class="card-overlay">
+                        <div class="rank-type">
+                            Aventura • Ninja
+                        </div>
 
-                    <h3>
-                        Demon Slayer
-                    </h3>
+                    </div>
 
-                    <p>
-                        Tanjiro luta contra demônios enquanto
-                        tenta salvar sua irmã Nezuko.
-                    </p>
+                    <div>
+                        ⭐
+                    </div>
 
-                    <div class="rating">
-                        ★★★★★ 10/10
+                    <div class="rank-rating">
+                        9.6
                     </div>
 
                 </div>
 
-            </article>
+
+                <div class="ranking-item">
+
+                    <div class="rank">
+                        4
+                    </div>
+
+                    <img
+                        class="rank-image"
+                        src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=200&q=80"
+                        alt=""
+                    >
+
+                    <div>
+
+                        <div class="rank-name">
+                            Dragon Ball
+                        </div>
+
+                        <div class="rank-type">
+                            Ação • Luta
+                        </div>
+
+                    </div>
+
+                    <div>
+                        ⭐
+                    </div>
+
+                    <div class="rank-rating">
+                        9.7
+                    </div>
+
+                </div>
 
 
-        </div>
+                <div class="ranking-item">
+
+                    <div class="rank">
+                        5
+                    </div>
+
+                    <img
+                        class="rank-image"
+                        src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=200&q=80"
+                        alt=""
+                    >
+
+                    <div>
+
+                        <div class="rank-name">
+                            Blue Lock
+                        </div>
+
+                        <div class="rank-type">
+                            Esporte • Futebol
+                        </div>
+
+                    </div>
+
+                    <div>
+                        ⭐
+                    </div>
+
+                    <div class="rank-rating">
+                        9.5
+                    </div>
+
+                </div>
 
 
-        <!-- SOBRE -->
+                <div class="ranking-item">
 
-        <section class="about" id="sobre">
+                    <div class="rank">
+                        6
+                    </div>
 
-            <h2>
-                ✦ Sobre o meu AnimeVerse
-            </h2>
+                    <img
+                        class="rank-image"
+                        src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=200&q=80"
+                        alt=""
+                    >
 
-            <p>
-                Este site foi criado para reunir alguns dos meus
-                animes favoritos em um único lugar.
-                A ideia é compartilhar minhas escolhas,
-                personagens, histórias e avaliações.
-            </p>
+                    <div>
 
-            <br>
+                        <div class="rank-name">
+                            7 Pecados Capitais
+                        </div>
 
-            <p>
-                <strong>Por: Breno Miguel Zurchetti</strong>
-            </p>
+                        <div class="rank-type">
+                            Fantasia • Aventura
+                        </div>
+
+                    </div>
+
+                    <div>
+                        ⭐
+                    </div>
+
+                    <div class="rank-rating">
+                        9.0
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PERSONAGENS
+        ===================================================== -->
+
+        <section
+            class="section"
+            id="personagens"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <div class="section-kicker">
+                        Personagens
+                    </div>
+
+                    <h2 class="section-title">
+                        Personagens marcantes
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="character-grid">
+
+
+                <div class="character">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=500&q=80"
+                        alt="Personagem"
+                    >
+
+                    <div class="character-info">
+
+                        <h4>
+                            Goku
+                        </h4>
+
+                        <p>
+                            Dragon Ball
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="character">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80"
+                        alt="Personagem"
+                    >
+
+                    <div class="character-info">
+
+                        <h4>
+                            Naruto Uzumaki
+                        </h4>
+
+                        <p>
+                            Naruto
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="character">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80"
+                        alt="Personagem"
+                    >
+
+                    <div class="character-info">
+
+                        <h4>
+                            Yuji Itadori
+                        </h4>
+
+                        <p>
+                            Jujutsu Kaisen
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="character">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80"
+                        alt="Personagem"
+                    >
+
+                    <div class="character-info">
+
+                        <h4>
+                            Isagi Yoichi
+                        </h4>
+
+                        <p>
+                            Blue Lock
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="character">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=500&q=80"
+                        alt="Personagem"
+                    >
+
+                    <div class="character-info">
+
+                        <h4>
+                            Eren Yeager
+                        </h4>
+
+                        <p>
+                            Attack on Titan
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="character">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80"
+                        alt="Personagem"
+                    >
+
+                    <div class="character-info">
+
+                        <h4>
+                            Meliodas
+                        </h4>
+
+                        <p>
+                            7 Pecados Capitais
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ESTATÍSTICAS
+        ===================================================== -->
+
+        <section
+            class="section"
+            id="sobre"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <div class="section-kicker">
+                        AnimeVerse
+                    </div>
+
+                    <h2 class="section-title">
+                        Nosso universo
+                    </h2>
+
+                    <p class="section-description">
+                        Um espaço criado para reunir alguns dos
+                        animes mais populares e suas histórias.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-box">
+
+                    <div class="number">
+                        06
+                    </div>
+
+                    <p>
+                        Animes cadastrados
+                    </p>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <div class="number">
+                        30+
+                    </div>
+
+                    <p>
+                        Personagens
+                    </p>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <div class="number">
+                        6
+                    </div>
+
+                    <p>
+                        Universos
+                    </p>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <div class="number">
+                        100%
+                    </div>
+
+                    <p>
+                        Feito com HTML, CSS e JS
+                    </p>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
 
 
-    <!-- MODAL -->
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
 
-    <div class="modal" id="modal">
+    <footer>
 
-        <div class="modal-content">
+        <div class="footer-grid">
+
+
+            <div>
+
+                <div class="logo">
+
+                    <div class="logo-icon">
+                        ⛩
+                    </div>
+
+                    Anime<span>Verse</span>
+
+                </div>
+
+                <p class="footer-description">
+
+                    Um projeto pessoal dedicado ao universo dos
+                    animes. Explore, pesquise, favorite e descubra
+                    novas histórias.
+
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Navegação
+                </h4>
+
+                <a href="#inicio">
+                    Início
+                </a>
+
+                <a href="#animes">
+                    Animes
+                </a>
+
+                <a href="#personagens">
+                    Personagens
+                </a>
+
+                <a href="#ranking">
+                    Ranking
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Animes
+                </h4>
+
+                <a href="#" onclick="openAnime('aot')">
+                    Attack on Titan
+                </a>
+
+                <a href="#" onclick="openAnime('db')">
+                    Dragon Ball
+                </a>
+
+                <a href="#" onclick="openAnime('bluelock')">
+                    Blue Lock
+                </a>
+
+                <a href="#" onclick="openAnime('naruto')">
+                    Naruto
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Mais
+                </h4>
+
+                <a href="#" onclick="openAnime('pecados')">
+                    7 Pecados Capitais
+                </a>
+
+                <a href="#" onclick="openAnime('jjk')">
+                    Jujutsu Kaisen
+                </a>
+
+                <a href="#sobre">
+                    Sobre
+                </a>
+
+                <a
+                    href="#"
+                    onclick="showToast('Obrigado por visitar o AnimeVerse!')"
+                >
+                    Contato
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 AnimeVerse —
+            Criado por Breno Miguel Zurchetti.
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         MODAL
+    ========================================================= -->
+
+    <div
+        class="modal"
+        id="animeModal"
+    >
+
+        <div class="modal-box">
 
             <button
-                class="close"
-                onclick="fecharModal()"
+                class="modal-close"
+                onclick="closeModal()"
+                aria-label="Fechar"
             >
                 ×
             </button>
 
-            <h2 id="modalTitulo">
-                Anime
-            </h2>
 
-            <p id="modalTexto">
-                Informações do anime.
-            </p>
+            <div
+                class="modal-banner"
+                id="modalBanner"
+            >
+
+                <div class="modal-banner-content">
+
+                    <div
+                        class="hero-badge"
+                        id="modalGenre"
+                    >
+                        Anime
+                    </div>
+
+                    <h2 id="modalTitle">
+                        Anime
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <p
+                    class="modal-description"
+                    id="modalDescription"
+                >
+                </p>
+
+
+                <div class="detail-grid">
+
+                    <div class="detail">
+
+                        <small>
+                            NOTA
+                        </small>
+
+                        <strong id="modalRating">
+                            9.0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <small>
+                            ANO
+                        </small>
+
+                        <strong id="modalYear">
+                            2020
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <small>
+                            GÊNERO
+                        </small>
+
+                        <strong id="modalType">
+                            Ação
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <small>
+                            TEMPORADAS
+                        </small>
+
+                        <strong id="modalSeasons">
+                            1
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <small>
+                            EPISÓDIOS
+                        </small>
+
+                        <strong id="modalEpisodes">
+                            24
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <small>
+                            STATUS
+                        </small>
+
+                        <strong>
+                            ⭐ Popular
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <h3 class="modal-section-title">
+                    🎬 Trailer
+                </h3>
+
+
+                <div class="trailer">
+
+                    <button
+                        class="play-button"
+                        onclick="showToast('Aqui você pode adicionar o trailer do anime.')"
+                    >
+                        ▶
+                    </button>
+
+                </div>
+
+
+                <h3 class="modal-section-title">
+                    ⭐ Minha avaliação
+                </h3>
+
+
+                <div>
+
+                    <button
+                        class="secondary-button"
+                        onclick="rateAnime(1)"
+                    >
+                        ⭐ 1
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        onclick="rateAnime(2)"
+                    >
+                        ⭐ 2
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        onclick="rateAnime(3)"
+                    >
+                        ⭐ 3
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        onclick="rateAnime(4)"
+                    >
+                        ⭐ 4
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        onclick="rateAnime(5)"
+                    >
+                        ⭐ 5
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- FOOTER -->
+    <!-- =========================================================
+         TOAST
+    ========================================================= -->
 
-    <footer>
+    <div
+        class="toast-container"
+        id="toastContainer"
+    ></div>
 
-        <p>
-            © 2026 <strong>AnimeVerse</strong>
-        </p>
 
-        <p>
-            Feito por Breno Miguel Zurchetti ❤️
-        </p>
-
-    </footer>
-
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
 
     <script>
 
-        /* =========================
-           PESQUISA
-        ========================= */
+        /* ========================================================
+           BANCO DE DADOS
+        ======================================================== */
 
-        function pesquisar() {
+        const animeData = {
 
-            const texto =
-                document
-                .getElementById("pesquisa")
-                .value
-                .toLowerCase();
+            aot: {
 
-            const cards =
-                document.querySelectorAll(".anime-card");
+                title: "Attack on Titan",
 
-            cards.forEach(card => {
+                genre: "Ação • Drama • Mistério",
 
-                const nome =
-                    card
-                    .dataset
-                    .name
-                    .toLowerCase();
+                rating: "9.8 / 10",
 
-                if (nome.includes(texto)) {
+                year: "2013",
 
-                    card.style.display = "block";
+                type: "Ação / Drama",
 
-                } else {
+                seasons: "4",
 
-                    card.style.display = "none";
+                episodes: "87",
 
-                }
+                image:
+                    "https://images.unsplash.com/photo-1541560052-77ec1bbc09f7?auto=format&fit=crop&w=1400&q=90",
 
-            });
+                description:
+                    "Em um mundo onde a humanidade vive cercada por enormes muralhas, criaturas gigantes conhecidas como Titãs representam uma ameaça constante. A história acompanha Eren Yeager e seus companheiros em uma jornada marcada por batalhas, mistérios, perdas e grandes revelações."
 
-        }
+            },
 
 
-        /* =========================
-           MODAL
-        ========================= */
+            db: {
 
-        const informacoes = {
+                title: "Dragon Ball",
 
-            "One Piece":
-                "One Piece acompanha Monkey D. Luffy e sua tripulação em uma grande aventura pelos mares. Luffy sonha em encontrar o One Piece e se tornar o Rei dos Piratas.",
+                genre: "Ação • Artes Marciais",
 
-            "Naruto":
-                "Naruto acompanha Naruto Uzumaki, um jovem ninja que sonha em se tornar Hokage. A história mistura batalhas, amizade, rivalidade e superação.",
+                rating: "9.7 / 10",
 
-            "Jujutsu Kaisen":
-                "Jujutsu Kaisen acompanha Yuji Itadori depois que ele entra no perigoso mundo dos feiticeiros e das maldições.",
+                year: "1986",
 
-            "Attack on Titan":
-                "Attack on Titan apresenta uma humanidade cercada por enormes muralhas enquanto tenta sobreviver aos misteriosos Titãs.",
+                type: "Ação / Luta",
 
-            "Demon Slayer":
-                "Demon Slayer acompanha Tanjiro Kamado, que se torna um caçador de demônios depois que sua família é atacada e sua irmã Nezuko é transformada."
-        };
+                seasons: "Várias",
 
+                episodes: "500+",
 
-        function abrirModal(anime) {
+                image:
+                    "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=1400&q=90",
 
-            document
-                .getElementById("modalTitulo")
-                .textContent = anime;
+                description:
+                    "Dragon Ball acompanha Son Goku desde sua infância até suas grandes batalhas contra inimigos cada vez mais poderosos. A série ficou conhecida por suas lutas, transformações, torneios e pelo desenvolvimento de personagens como Vegeta, Piccolo e Gohan."
 
-            document
-                .getElementById("modalTexto")
-                .textContent = informacoes[anime];
-
-            document
-                .getElementById("modal")
-                .classList
-                .add("active");
-
-        }
+            },
 
 
-        function fecharModal() {
+            bluelock: {
 
-            document
-                .getElementById("modal")
-                .classList
-                .remove("active");
+                title: "Blue Lock",
 
-        }
+                genre: "Esporte • Futebol",
+
+                rating: "9.5 / 10",
+
+                year: "2022",
+
+                type: "Esporte",
+
+                seasons: "2+",
+
+                episodes: "38+",
+
+                image:
+                    "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1400&q=90",
+
+                description:
+                    "Depois da eliminação do Japão em uma competição internacional, um projeto radical é criado para encontrar o atacante mais egoísta e eficiente do país. Isagi Yoichi entra em uma disputa intensa contra outros jovens jogadores."
+
+            },
 
 
-        /* Fechar clicando fora */
+            naruto: {
 
-        document
-            .getElementById("modal")
-            .addEventListener("click", function(event) {
+                title: "Naruto",
 
-                if (event.target === this) {
+                genre: "Aventura • Ninja • Ação",
 
-                    fecharModal();
+                rating: "9.6 / 10",
 
-                }
+                year: "2002",
 
-            });
+                type: "Aventura",
+
+                seasons: "2 séries",
+
+                episodes: "700+",
+
+                image:
+                    "https://images.unsplash.com/photo-1601850494422-3cf14624b0b3?auto=format&fit=crop&w=1400&q=90",
+
+                description:
+                    "Naruto Uzumaki é um jovem ninja que carrega dentro de si uma poderosa criatura e sonha em se tornar Hokage. Ao lado de seus companheiros, ele enfrenta missões, rivais e desafios enquanto cresce como ninja."
+
+            },
 
 
-        /* ESC fecha o modal */
+            pecados: {
 
-        document.addEventListener("keydown", function(event) {
+                title: "Os 7 Pecados Capitais",
 
-            if (event.key === "Escape") {
+                genre: "Fantasia • Aventura • Ação",
 
-                fecharModal();
+                rating: "9.0 / 10",
+
+                year: "2014",
+
+                type: "Fantasia",
+
+                seasons: "5",
+
+                episodes: "100+",
+
+                image:
+                    "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1400&q=90",
+
+                description:
+                    "Meliodas lidera os Sete Pecados Capitais em uma aventura para proteger o reino e enfrentar forças perigosas. Cada integrante possui habilidades únicas e uma história própria."
+
+            },
+
+
+            jjk: {
+
+                title: "Jujutsu Kaisen",
+
+                genre: "Ação • Sobrenatural • Fantasia",
+
+                rating: "9.6 / 10",
+
+                year: "2020",
+
+                type: "Sobrenatural",
+
+                seasons: "2+",
+
+                episodes: "47+",
+
+                image:
+                    "https://images.unsplash.com/photo-1577083552431-6e5fd01988a5?auto=format&fit=crop&w=1400&q=90",
+
+                description:
+                    "Yuji Itadori acaba envolvido no mundo dos feiticeiros depois de entrar em contato com um objeto amaldiçoado. Ao lado de personagens como Satoru Gojo e Megumi Fushiguro, ele enfrenta maldições perigosas."
 
             }
 
-        });
+        };
+
+
+        /* ========================================================
+           ABRIR MODAL
+        ======================================================== */
+
+        let currentAnime = null;
+
+
+        function openAnime(id) {
+
+            const anime = animeData[id];
+
+            if (!anime) {
+                return;
+            }
+
+            currentAnime = id;
+
+            document
+                .getElementById("modalTitle")
+                .textContent = anime.title;
+
+            document
+                .getElementById("modalGenre")
+                .textContent = anime.genre;
+
+            document
+                .getElementById("modalDescription")
+                .textContent = anime.description;
+
+            document
+                .getElementById("modalRating")
+                .textContent = anime.rating;
+
+            document
+                .getElementById("modalYear")
+                .textContent = anime.year;
+
+            document
+                .getElementById("modalType")
+                .textContent = anime.type;
+
+            document
+                .getElementById("modalSeasons")
+                .textContent = anime.seasons;
+
+            document
+                .getElementById("modalEpisodes")
+                .textContent = anime.episodes;
+
+            document
+                .getElementById("modalBanner")
+                .style.backgroundImage =
+                    `url("${anime.image}")`;
+
+            document
+                .getElementById("animeModal")
+                .classList
+                .add("open");
+
+            document.body.style.overflow = "hidden";
+        }
+
+
+        /* ========================================================
+           FECHAR MODAL
+        ======================================================== */
+
+        function closeModal() {
+
+            document
+                .getElementById("animeModal")
+                .classList
+                .remove("open");
+
+            document.body.style.overflow = "";
+        }
+
+
+        document
+            .getElementById("animeModal")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        closeModal();
+
+                    }
+
+                }
+            );
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeModal();
+
+                }
+
+            }
+        );
+
+
+        /* ========================================================
+           PESQUISA
+        ======================================================== */
+
+        function filterAnimes() {
+
+            const search =
+                document
+                    .getElementById("searchInput")
+                    .value
+                    .toLowerCase()
+                    .trim();
+
+            const genre =
+                document
+                    .getElementById("genreFilter")
+                    .value;
+
+            const cards =
+                document
+                    .querySelectorAll(".anime-card");
+
+            let found = 0;
+
+            cards.forEach(card => {
+
+                const name =
+                    card.dataset.name;
+
+                const cardGenre =
+                    card.dataset.genre;
+
+                const matchesName =
+                    name.includes(search);
+
+                const matchesGenre =
+                    genre === "all" ||
+                    cardGenre === genre;
+
+                if (
+                    matchesName &&
+                    matchesGenre
+                ) {
+
+                    card.style.display =
+                        "block";
+
+                    found++;
+
+                } else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            });
+
+
+            if (found === 0) {
+
+                showToast(
+                    "Nenhum anime encontrado."
+                );
+
+            }
+
+        }
+
+
+        /* ========================================================
+           RESET FILTROS
+        ======================================================== */
+
+        function resetFilters() {
+
+            document
+                .getElementById("searchInput")
+                .value = "";
+
+            document
+                .getElementById("genreFilter")
+                .value = "all";
+
+            document
+                .querySelectorAll(".anime-card")
+                .forEach(card => {
+
+                    card.style.display =
+                        "block";
+
+                });
+
+            showToast(
+                "Filtros limpos!"
+            );
+
+        }
+
+
+        /* ========================================================
+           FAVORITOS
+        ======================================================== */
+
+        function getFavorites() {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    "animeverse-favorites"
+                ) || "[]"
+            );
+
+        }
+
+
+        function saveFavorites(favorites) {
+
+            localStorage.setItem(
+                "animeverse-favorites",
+                JSON.stringify(favorites)
+            );
+
+        }
+
+
+        function toggleFavorite(
+            event,
+            id
+        ) {
+
+            event.stopPropagation();
+
+            const favorites =
+                getFavorites();
+
+            const index =
+                favorites.indexOf(id);
+
+            const button =
+                document
+                    .getElementById(
+                        `fav-${id}`
+                    );
+
+            if (index === -1) {
+
+                favorites.push(id);
+
+                button.classList
+                    .add("active");
+
+                button.textContent =
+                    "♥";
+
+                showToast(
+                    `${animeData[id].title} foi adicionado aos favoritos!`
+                );
+
+            } else {
+
+                favorites.splice(
+                    index,
+                    1
+                );
+
+                button.classList
+                    .remove("active");
+
+                button.textContent =
+                    "♡";
+
+                showToast(
+                    `${animeData[id].title} foi removido dos favoritos.`
+                );
+
+            }
+
+            saveFavorites(favorites);
+
+        }
+
+
+        function loadFavorites() {
+
+            const favorites =
+                getFavorites();
+
+            favorites.forEach(id => {
+
+                const button =
+                    document
+                        .getElementById(
+                            `fav-${id}`
+                        );
+
+                if (button) {
+
+                    button.classList
+                        .add("active");
+
+                    button.textContent =
+                        "♥";
+
+                }
+
+            });
+
+        }
+
+
+        /* ========================================================
+           TEMA
+        ======================================================== */
+
+        function toggleTheme() {
+
+            document
+                .body
+                .classList
+                .toggle("light");
+
+            const light =
+                document
+                    .body
+                    .classList
+                    .contains("light");
+
+            localStorage.setItem(
+                "animeverse-theme",
+                light
+                    ? "light"
+                    : "dark"
+            );
+
+            showToast(
+                light
+                    ? "Tema claro ativado."
+                    : "Tema escuro ativado."
+            );
+
+        }
+
+
+        function loadTheme() {
+
+            const theme =
+                localStorage.getItem(
+                    "animeverse-theme"
+                );
+
+            if (
+                theme === "light"
+            ) {
+
+                document
+                    .body
+                    .classList
+                    .add("light");
+
+            }
+
+        }
+
+
+        /* ========================================================
+           AVALIAÇÃO
+        ======================================================== */
+
+        function rateAnime(stars) {
+
+            if (!currentAnime) {
+                return;
+            }
+
+            const anime =
+                animeData[currentAnime];
+
+            localStorage.setItem(
+                `rating-${currentAnime}`,
+                stars
+            );
+
+            showToast(
+                `Você avaliou ${anime.title} com ${stars} estrela(s)!`
+            );
+
+        }
+
+
+        /* ========================================================
+           TOAST
+        ======================================================== */
+
+        function showToast(message) {
+
+            const container =
+                document
+                    .getElementById(
+                        "toastContainer"
+                    );
+
+            const toast =
+                document.createElement(
+                    "div"
+                );
+
+            toast.className =
+                "toast";
+
+            toast.textContent =
+                message;
+
+            container.appendChild(
+                toast
+            );
+
+            setTimeout(
+                () => {
+
+                    toast.remove();
+
+                },
+                3500
+            );
+
+        }
+
+
+        /* ========================================================
+           EASTER EGG
+        ======================================================== */
+
+        let konami = [];
+
+        const secret = [
+            "ArrowUp",
+            "ArrowUp",
+            "ArrowDown",
+            "ArrowDown",
+            "ArrowLeft",
+            "ArrowRight",
+            "ArrowLeft",
+            "ArrowRight"
+        ];
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                konami.push(
+                    event.key
+                );
+
+                konami =
+                    konami.slice(
+                        -secret.length
+                    );
+
+                if (
+                    konami.join(",") ===
+                    secret.join(",")
+                ) {
+
+                    showToast(
+                        "🔥 EASTER EGG DESBLOQUEADO! 🔥"
+                    );
+
+                    document.body.style
+                        .animation =
+                        "pulse 1s infinite";
+
+                }
+
+            }
+        );
+
+
+        /* ========================================================
+           INICIALIZAÇÃO
+        ======================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                loadFavorites();
+
+                loadTheme();
+
+                showToast(
+                    "Bem-vindo ao Anime Verse! ✨"
+                );
+
+            }
+        );
 
     </script>
 

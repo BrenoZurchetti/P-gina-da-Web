@@ -5,240 +5,660 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Meus Animes Favoritos</title>
+    <title>AnimeVerse | Meus Animes Favoritos</title>
 
     <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #111;
+            font-family: 'Poppins', sans-serif;
+            background: #07070b;
             color: white;
+            overflow-x: hidden;
         }
 
-        header {
-            background: linear-gradient(135deg, #ff0000, #8b0000);
-            text-align: center;
-            padding: 50px 20px;
+        /* =========================
+           FUNDO
+        ========================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #7c3cff;
+            filter: blur(180px);
+            opacity: 0.15;
+            top: -200px;
+            left: -200px;
+            z-index: -1;
         }
 
-        header h1 {
-            font-size: 40px;
-            margin-bottom: 15px;
+        body::after {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #ff1744;
+            filter: blur(180px);
+            opacity: 0.10;
+            right: -200px;
+            bottom: -200px;
+            z-index: -1;
         }
 
-        header p {
-            font-size: 18px;
-            color: #eee;
-        }
+        /* =========================
+           MENU
+        ========================= */
 
-        main {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .introducao {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .introducao h2 {
-            color: #ff3333;
-            font-size: 30px;
-            margin-bottom: 15px;
-        }
-
-        .introducao p {
-            color: #ccc;
-            margin: 10px;
-        }
-
-        .pesquisa {
-            margin-bottom: 30px;
-        }
-
-        .pesquisa input {
+        nav {
+            position: fixed;
+            top: 0;
             width: 100%;
-            padding: 15px;
-            background-color: #222;
-            color: white;
-            border: 2px solid #444;
-            border-radius: 10px;
-            font-size: 16px;
+            height: 75px;
+            padding: 0 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(7, 7, 11, 0.75);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+            z-index: 1000;
         }
 
-        .pesquisa input:focus {
-            outline: none;
-            border-color: red;
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
-        .lista-animes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+        .logo span {
+            color: #a970ff;
         }
 
-        .card {
-            background-color: #222;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 30px;
             transition: 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+        nav a:hover {
+            color: white;
         }
 
-        .card img {
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            padding: 150px 8% 80px;
+
+            display: flex;
+            align-items: center;
+
+            background:
+                linear-gradient(90deg,
+                #07070b 10%,
+                rgba(7,7,11,0.85) 40%,
+                rgba(7,7,11,0.25) 100%),
+                url("https://ogre.natalie.mu/media/news/music/2016/0605/onepiece_key.jpg?imdensity=1&imwidth=750");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 30px;
+
+            background: rgba(169,112,255,0.15);
+            border: 1px solid rgba(169,112,255,0.4);
+
+            color: #c7a6ff;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 7vw, 85px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #a970ff;
+        }
+
+        .hero p {
+            color: #c0c0c8;
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 25px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #a970ff;
+            color: white;
+            box-shadow: 0 0 25px rgba(169,112,255,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(169,112,255,0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* =========================
+           CONTEÚDO
+        ========================= */
+
+        main {
+            max-width: 1250px;
+            margin: auto;
+            padding: 80px 25px;
+        }
+
+        .section-title {
+            margin-bottom: 35px;
+        }
+
+        .section-title small {
+            color: #a970ff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin-top: 8px;
+        }
+
+        /* =========================
+           PESQUISA
+        ========================= */
+
+        .search-box {
+            margin-bottom: 40px;
+        }
+
+        .search-box input {
             width: 100%;
-            height: 350px;
-            object-fit: cover;
+            padding: 18px 22px;
+
+            background: #111117;
+            color: white;
+
+            border: 1px solid #272733;
+            border-radius: 15px;
+
+            font-size: 16px;
+
+            transition: 0.3s;
         }
 
-        .card-conteudo {
+        .search-box input:focus {
+            outline: none;
+            border-color: #a970ff;
+            box-shadow: 0 0 20px rgba(169,112,255,0.15);
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .anime-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(230px, 1fr));
+
+            gap: 25px;
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .anime-card {
+            position: relative;
+
+            height: 480px;
+
+            border-radius: 20px;
+            overflow: hidden;
+
+            background: #111117;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.4s,
+                box-shadow 0.4s;
+        }
+
+        .anime-card:hover {
+            transform: translateY(-12px) scale(1.02);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.6),
+                0 0 30px rgba(169,112,255,0.15);
+        }
+
+        .anime-card img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: 0.6s;
+        }
+
+        .anime-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    transparent 25%,
+                    rgba(0,0,0,0.95) 90%
+                );
+        }
+
+        .rank {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 12px;
+
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+
+            font-weight: 800;
+            font-size: 18px;
+
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .anime-card h3 {
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .anime-card p {
+            color: #bbb;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .rating {
+            margin-top: 12px;
+            color: #ffd54a;
+            font-weight: 700;
+        }
+
+        /* =========================
+           SOBRE
+        ========================= */
+
+        .about {
+            margin-top: 100px;
+
+            padding: 45px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(169,112,255,0.12),
+                    rgba(255,255,255,0.03)
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .about h2 {
+            margin-bottom: 15px;
+        }
+
+        .about p {
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+            justify-content: center;
+            align-items: center;
+
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+
+            z-index: 2000;
+
             padding: 20px;
         }
 
-        .card h2 {
-            color: #ff3333;
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            color: #ccc;
-            line-height: 1.5;
-            margin-bottom: 8px;
-        }
-
-        .nota {
-            color: #ffd700 !important;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .botoes {
+        .modal.active {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
         }
 
-        button {
-            background-color: #333;
-            color: white;
+        .modal-content {
+            position: relative;
+
+            max-width: 600px;
+            width: 100%;
+
+            padding: 35px;
+
+            border-radius: 25px;
+
+            background: #111117;
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            box-shadow: 0 30px 80px black;
+
+            animation: aparecer 0.3s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close {
+            position: absolute;
+
+            right: 20px;
+            top: 15px;
+
+            background: none;
             border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
+
+            color: white;
+
+            font-size: 30px;
+
             cursor: pointer;
-            font-size: 16px;
         }
 
-        button:hover {
-            background-color: #ff0000;
+        .modal-content h2 {
+            color: #b889ff;
+            font-size: 35px;
+            margin-bottom: 15px;
         }
 
-        .sem-animes {
-            text-align: center;
-            color: #aaa;
-            font-size: 20px;
-            grid-column: 1 / -1;
-            padding: 40px;
+        .modal-content p {
+            color: #bbb;
+            line-height: 1.8;
         }
+
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
-            background-color: #1a1a1a;
+            padding: 40px 20px;
+
             text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            color: #888;
+
+            border-top: 1px solid rgba(255,255,255,0.08);
+
+            color: #777;
         }
 
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 30px;
+        footer strong {
+            color: #a970ff;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
             }
 
-            .card img {
-                height: 300px;
+            nav .links {
+                display: none;
+            }
+
+            .hero {
+                padding: 130px 25px 70px;
+                background-position: 65% center;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .anime-card {
+                height: 430px;
+            }
+
+            .about {
+                padding: 30px;
             }
         }
+
     </style>
+
 </head>
 
 <body>
 
-    <header>
-        <h1>🍥 Meus Animes Favoritos</h1>
+    <!-- MENU -->
 
-        <p>
-            Um cantinho para compartilhar meus animes favoritos,
-            personagens e avaliações.
-        </p>
-    </header>
+    <nav>
 
-    <main>
+        <div class="logo">
+            Anime<span>Verse</span>
+        </div>
 
-        <section class="introducao">
+        <div class="links">
+            <a href="#inicio">Início</a>
+            <a href="#animes">Animes</a>
+            <a href="#sobre">Sobre</a>
+        </div>
 
-            <h2>Meus Animes Favoritos</h2>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <span class="tag">
+                ✦ Meu catálogo pessoal
+            </span>
+
+            <h1>
+                Meus<br>
+                <span>Animes Favoritos</span>
+            </h1>
 
             <p>
-                Eu gosto de vários animes e aqui estão alguns dos
-                meus favoritos.
+                Uma coleção dos animes que mais gosto.
+                Aqui você pode conhecer minhas escolhas,
+                avaliações e algumas das histórias que mais
+                me marcaram.
             </p>
 
-            <p>
-                Por: Breno Miguel Zurchetti
-            </p>
+            <div class="hero-buttons">
 
-        </section>
+                <a href="#animes">
+                    <button class="btn btn-primary">
+                        Explorar animes
+                    </button>
+                </a>
 
-        <section class="pesquisa">
+                <a href="#sobre">
+                    <button class="btn btn-secondary">
+                        Sobre o site
+                    </button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTEÚDO -->
+
+    <main id="animes">
+
+        <div class="section-title">
+
+            <small>Minha coleção</small>
+
+            <h2>
+                Top 5 Animes
+            </h2>
+
+        </div>
+
+
+        <!-- PESQUISA -->
+
+        <div class="search-box">
 
             <input
                 type="text"
-                id="campoPesquisa"
-                placeholder="🔎 Pesquisar anime..."
-                onkeyup="pesquisarAnime()"
+                id="pesquisa"
+                placeholder="🔎 Pesquisar por anime..."
+                onkeyup="pesquisar()"
             >
 
-        </section>
+        </div>
 
-        <section class="lista-animes" id="listaAnimes">
+
+        <!-- CARDS -->
+
+        <div class="anime-grid" id="animeGrid">
+
 
             <!-- ONE PIECE -->
 
-            <article class="card">
+            <article
+                class="anime-card"
+                data-name="one piece"
+                onclick="abrirModal('One Piece')"
+            >
 
                 <img
-                    src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80"
+                    src="https://ogre.natalie.mu/media/news/music/2016/0605/onepiece_key.jpg?imdensity=1&imwidth=750"
                     alt="One Piece"
                 >
 
-                <div class="card-conteudo">
+                <div class="rank">
+                    #1
+                </div>
 
-                    <h2>🏴‍☠️ One Piece</h2>
+                <div class="card-overlay">
+
+                    <h3>
+                        One Piece
+                    </h3>
 
                     <p>
-                        Acompanhe Monkey D. Luffy e sua tripulação
-                        em uma grande aventura pelos mares em busca
-                        do lendário One Piece.
+                        A aventura de Luffy e sua tripulação
+                        em busca do lendário One Piece.
                     </p>
 
-                    <p class="nota">
-                        ⭐ Minha nota: 10/10
-                    </p>
-
-                    <div class="botoes">
-                        <button onclick="mostrarInfo('One Piece')">
-                            Ver detalhes
-                        </button>
+                    <div class="rating">
+                        ★★★★★ 10/10
                     </div>
 
                 </div>
@@ -248,31 +668,34 @@
 
             <!-- NARUTO -->
 
-            <article class="card">
+            <article
+                class="anime-card"
+                data-name="naruto"
+                onclick="abrirModal('Naruto')"
+            >
 
                 <img
-                    src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?auto=format&fit=crop&w=600&q=80"
+                    src="https://naruto-official.com/_next/image?url=%2Fimages%2Fspecial%2Fanime-gallery%2Fvisual2.jpg&w=1200&q=75"
                     alt="Naruto"
                 >
 
-                <div class="card-conteudo">
+                <div class="rank">
+                    #2
+                </div>
 
-                    <h2>🍥 Naruto</h2>
+                <div class="card-overlay">
+
+                    <h3>
+                        Naruto
+                    </h3>
 
                     <p>
-                        Naruto Uzumaki é um jovem ninja que sonha
-                        em se tornar Hokage e conquistar o respeito
-                        de sua vila.
+                        A jornada de Naruto para se tornar
+                        Hokage e conquistar o respeito da vila.
                     </p>
 
-                    <p class="nota">
-                        ⭐ Minha nota: 10/10
-                    </p>
-
-                    <div class="botoes">
-                        <button onclick="mostrarInfo('Naruto')">
-                            Ver detalhes
-                        </button>
+                    <div class="rating">
+                        ★★★★★ 10/10
                     </div>
 
                 </div>
@@ -280,32 +703,36 @@
             </article>
 
 
-            <!-- JUJUTSU KAISEN -->
+            <!-- JUJUTSU -->
 
-            <article class="card">
+            <article
+                class="anime-card"
+                data-name="jujutsu kaisen"
+                onclick="abrirModal('Jujutsu Kaisen')"
+            >
 
                 <img
-                    src="https://images.unsplash.com/photo-1577083552431-6e5fd01988a5?auto=format&fit=crop&w=600&q=80"
+                    src="https://static.wikia.nocookie.net/jujutsu-kaisen/images/8/88/Anime_Key_Visual_2.png/revision/latest/scale-to-width-down/1200?cb=20201212034001"
                     alt="Jujutsu Kaisen"
                 >
 
-                <div class="card-conteudo">
+                <div class="rank">
+                    #3
+                </div>
 
-                    <h2>👹 Jujutsu Kaisen</h2>
+                <div class="card-overlay">
+
+                    <h3>
+                        Jujutsu Kaisen
+                    </h3>
 
                     <p>
-                        Yuji Itadori entra no mundo dos feiticeiros
-                        após entrar em contato com um objeto amaldiçoado.
+                        Feiticeiros enfrentam maldições
+                        em batalhas sobrenaturais.
                     </p>
 
-                    <p class="nota">
-                        ⭐ Minha nota: 10/10
-                    </p>
-
-                    <div class="botoes">
-                        <button onclick="mostrarInfo('Jujutsu Kaisen')">
-                            Ver detalhes
-                        </button>
+                    <div class="rating">
+                        ★★★★★ 10/10
                     </div>
 
                 </div>
@@ -315,31 +742,34 @@
 
             <!-- ATTACK ON TITAN -->
 
-            <article class="card">
+            <article
+                class="anime-card"
+                data-name="attack on titan"
+                onclick="abrirModal('Attack on Titan')"
+            >
 
                 <img
-                    src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80"
+                    src="https://contents.oricon.co.jp/upimg/news/2302000/2301790/20231104_030916_p_o_70262485.jpg"
                     alt="Attack on Titan"
                 >
 
-                <div class="card-conteudo">
+                <div class="rank">
+                    #4
+                </div>
 
-                    <h2>⚔️ Attack on Titan</h2>
+                <div class="card-overlay">
+
+                    <h3>
+                        Attack on Titan
+                    </h3>
 
                     <p>
-                        A humanidade luta pela sobrevivência enquanto
-                        vive cercada por enormes muralhas que tentam
-                        protegê-la dos Titãs.
+                        Uma luta desesperada pela sobrevivência
+                        contra os misteriosos Titãs.
                     </p>
 
-                    <p class="nota">
-                        ⭐ Minha nota: 10/10
-                    </p>
-
-                    <div class="botoes">
-                        <button onclick="mostrarInfo('Attack on Titan')">
-                            Ver detalhes
-                        </button>
+                    <div class="rating">
+                        ★★★★★ 10/10
                     </div>
 
                 </div>
@@ -349,50 +779,106 @@
 
             <!-- DEMON SLAYER -->
 
-            <article class="card">
+            <article
+                class="anime-card"
+                data-name="demon slayer"
+                onclick="abrirModal('Demon Slayer')"
+            >
 
                 <img
-                    src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80"
+                    src="https://s.animeanime.jp/imgs/p/64XVvff3mD9cFhi_PU1_DqGg_6ytrq_oqaqr/499345.jpg?zoom=spacing"
                     alt="Demon Slayer"
                 >
 
-                <div class="card-conteudo">
+                <div class="rank">
+                    #5
+                </div>
 
-                    <h2>🔥 Demon Slayer</h2>
+                <div class="card-overlay">
+
+                    <h3>
+                        Demon Slayer
+                    </h3>
 
                     <p>
-                        Tanjiro Kamado embarca em uma jornada para
-                        encontrar uma cura para sua irmã e enfrentar
-                        perigosos demônios.
+                        Tanjiro luta contra demônios enquanto
+                        tenta salvar sua irmã Nezuko.
                     </p>
 
-                    <p class="nota">
-                        ⭐ Minha nota: 10/10
-                    </p>
-
-                    <div class="botoes">
-                        <button onclick="mostrarInfo('Demon Slayer')">
-                            Ver detalhes
-                        </button>
+                    <div class="rating">
+                        ★★★★★ 10/10
                     </div>
 
                 </div>
 
             </article>
 
+
+        </div>
+
+
+        <!-- SOBRE -->
+
+        <section class="about" id="sobre">
+
+            <h2>
+                ✦ Sobre o meu AnimeVerse
+            </h2>
+
+            <p>
+                Este site foi criado para reunir alguns dos meus
+                animes favoritos em um único lugar.
+                A ideia é compartilhar minhas escolhas,
+                personagens, histórias e avaliações.
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Por: Breno Miguel Zurchetti</strong>
+            </p>
+
         </section>
 
     </main>
 
 
+    <!-- MODAL -->
+
+    <div class="modal" id="modal">
+
+        <div class="modal-content">
+
+            <button
+                class="close"
+                onclick="fecharModal()"
+            >
+                ×
+            </button>
+
+            <h2 id="modalTitulo">
+                Anime
+            </h2>
+
+            <p id="modalTexto">
+                Informações do anime.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
     <footer>
 
         <p>
-            © 2026 - Meu Site de Animes
+            © 2026 <strong>AnimeVerse</strong>
         </p>
 
         <p>
-            Feito por Breno Miguel Zurchetti 
+            Feito por Breno Miguel Zurchetti ❤️
         </p>
 
     </footer>
@@ -400,32 +886,32 @@
 
     <script>
 
-        function pesquisarAnime() {
+        /* =========================
+           PESQUISA
+        ========================= */
 
-            const pesquisa =
+        function pesquisar() {
+
+            const texto =
                 document
-                .getElementById("campoPesquisa")
+                .getElementById("pesquisa")
                 .value
                 .toLowerCase();
 
             const cards =
-                document.querySelectorAll(".card");
+                document.querySelectorAll(".anime-card");
 
-            let encontrados = 0;
-
-            cards.forEach(function(card) {
+            cards.forEach(card => {
 
                 const nome =
                     card
-                    .querySelector("h2")
-                    .textContent
+                    .dataset
+                    .name
                     .toLowerCase();
 
-                if (nome.includes(pesquisa)) {
+                if (nome.includes(texto)) {
 
                     card.style.display = "block";
-
-                    encontrados++;
 
                 } else {
 
@@ -438,30 +924,83 @@
         }
 
 
-        function mostrarInfo(anime) {
+        /* =========================
+           MODAL
+        ========================= */
 
-            const mensagens = {
+        const informacoes = {
 
-                "One Piece":
-                    "Uma aventura épica pelos mares com Luffy e sua tripulação!",
+            "One Piece":
+                "One Piece acompanha Monkey D. Luffy e sua tripulação em uma grande aventura pelos mares. Luffy sonha em encontrar o One Piece e se tornar o Rei dos Piratas.",
 
-                "Naruto":
-                    "A história de Naruto Uzumaki e sua jornada para se tornar Hokage.",
+            "Naruto":
+                "Naruto acompanha Naruto Uzumaki, um jovem ninja que sonha em se tornar Hokage. A história mistura batalhas, amizade, rivalidade e superação.",
 
-                "Jujutsu Kaisen":
-                    "Feiticeiros enfrentam maldições e perigos sobrenaturais.",
+            "Jujutsu Kaisen":
+                "Jujutsu Kaisen acompanha Yuji Itadori depois que ele entra no perigoso mundo dos feiticeiros e das maldições.",
 
-                "Attack on Titan":
-                    "Uma história de sobrevivência, mistérios e batalhas contra os Titãs.",
+            "Attack on Titan":
+                "Attack on Titan apresenta uma humanidade cercada por enormes muralhas enquanto tenta sobreviver aos misteriosos Titãs.",
 
-                "Demon Slayer":
-                    "Tanjiro enfrenta demônios enquanto busca uma maneira de salvar sua irmã."
+            "Demon Slayer":
+                "Demon Slayer acompanha Tanjiro Kamado, que se torna um caçador de demônios depois que sua família é atacada e sua irmã Nezuko é transformada."
+        };
 
-            };
 
-            alert(mensagens[anime]);
+        function abrirModal(anime) {
+
+            document
+                .getElementById("modalTitulo")
+                .textContent = anime;
+
+            document
+                .getElementById("modalTexto")
+                .textContent = informacoes[anime];
+
+            document
+                .getElementById("modal")
+                .classList
+                .add("active");
 
         }
+
+
+        function fecharModal() {
+
+            document
+                .getElementById("modal")
+                .classList
+                .remove("active");
+
+        }
+
+
+        /* Fechar clicando fora */
+
+        document
+            .getElementById("modal")
+            .addEventListener("click", function(event) {
+
+                if (event.target === this) {
+
+                    fecharModal();
+
+                }
+
+            });
+
+
+        /* ESC fecha o modal */
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+
+                fecharModal();
+
+            }
+
+        });
 
     </script>
 
